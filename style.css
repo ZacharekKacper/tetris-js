@@ -1,4 +1,4 @@
-#game-container{
+/* #game-container{
     display: flex;
     flex-direction: column;
     
@@ -13,4 +13,120 @@
     border: 1px solid black;
     display: flex;
     width: 400px;
+} */
+
+@keyframes background-pan {
+    from {
+        background-position: left;
+    }
+    to {
+        background-position: right;
+    }
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    /* background-color: #383838; */
+    animation: background-pan 60s linear infinite;
+    /* background: linear-gradient(
+        to right,
+        rgb(123, 1, 180),
+        rgb(204, 0, 143),
+        rgb(123, 1, 180)
+    ); */
+    background: url(background.svg);
+    /* background-position: left bottom right bottom; */
+    /* background-repeat: no-repeat; */
+    background-size: 300%;
+    
+    /* overflow: hidden; */
+}
+.row {
+    width: 400px;
+    height: 40px;
+    /* animation: background-pan 10s linear infinite;
+    background: linear-gradient(
+        to right,
+        rgb(63, 0, 92),
+        rgb(116, 0, 81),
+        rgb(63, 0, 92)
+    );
+    background-size: 200%;
+    overflow: hidden; */
+    /* background-color: black; */
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    /* display: flex; */
+    /* flex-direction: row; */
+    margin: auto;
+}
+.column {
+    background-color: #191919;
+    margin: 1px;
+    border-radius: 6px;
+    content: "";
+}
+#game {
+    margin: auto;
+    padding: 0 2px;
+    background-color: rgba(0, 0, 0, .4);
+    width: 606px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+#hold-text, #next-text{
+    width: 100px;
+}
+#score-text {
+    width: 400px;
+    margin-right: 1px;
+}
+
+#hold-piece, .next-piece{
+    background-color: #191919;
+    height: 100px;
+    width: 100px;
+}
+#hold-text, #next-text, #score-text {
+    height: 50px;
+    text-align: center;
+    color: white;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    background-color: #191919;
+}
+
+#hold-piece, .next-piece, #hold-text, #next-text, #score-text{
+    /* border: 1px solid transparent; */
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin-top: 2px;
+    border-radius: 6px;
+    padding: 2px;
+}
+
+#hold-text, #next-text {
+    padding: 12px;
+}
+#score-text {
+    margin-bottom: 1px;
+    margin-left: 1px;
+}
+#hold, #board{
+    margin-right: 1px;
+    margin-left: 1px;
+}
+#board {
+    width: fit-content;
+    margin-left: 0;
+}
+p {
+    margin: 0;
+    font-size: 15px;
 }

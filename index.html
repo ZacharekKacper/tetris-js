@@ -6,252 +6,273 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani&display=swap');
+    </style>
 </head>
 <body>
-    <div id="game-container">
-        <div class="row" id="row1">
-            <div class="column" id="column1"></div>
-            <div class="column" id="column2"></div>
-            <div class="column" id="column3"></div>
-            <div class="column" id="column4"></div>
-            <div class="column" id="column5"></div>
-            <div class="column" id="column6"></div>
-            <div class="column" id="column7"></div>
-            <div class="column" id="column8"></div>
-            <div class="column" id="column9"></div>
-            <div class="column" id="column10"></div>
+    <div id="game">
+        <div id="hold">
+            <div id="hold-text">Hold</div>
+            <div id="hold-piece"></div>
         </div>
-        <div class="row" id="row2">
-            <div class="column" id="column1"></div>
-            <div class="column" id="column2"></div>
-            <div class="column" id="column3"></div>
-            <div class="column" id="column4"></div>
-            <div class="column" id="column5"></div>
-            <div class="column" id="column6"></div>
-            <div class="column" id="column7"></div>
-            <div class="column" id="column8"></div>
-            <div class="column" id="column9"></div>
-            <div class="column" id="column10"></div>
-        </div>
-        <div class="row" id="row3">
-            <div class="column" id="column1"></div>
-            <div class="column" id="column2"></div>
-            <div class="column" id="column3"></div>
-            <div class="column" id="column4"></div>
-            <div class="column" id="column5"></div>
-            <div class="column" id="column6"></div>
-            <div class="column" id="column7"></div>
-            <div class="column" id="column8"></div>
-            <div class="column" id="column9"></div>
-            <div class="column" id="column10"></div>
-        </div>
-        <div class="row" id="row4">
-            <div class="column" id="column1"></div>
-            <div class="column" id="column2"></div>
-            <div class="column" id="column3"></div>
-            <div class="column" id="column4"></div>
-            <div class="column" id="column5"></div>
-            <div class="column" id="column6"></div>
-            <div class="column" id="column7"></div>
-            <div class="column" id="column8"></div>
-            <div class="column" id="column9"></div>
-            <div class="column" id="column10"></div>
-        </div>
-        <div class="row" id="row5">
-            <div class="column" id="column1"></div>
-            <div class="column" id="column2"></div>
-            <div class="column" id="column3"></div>
-            <div class="column" id="column4"></div>
-            <div class="column" id="column5"></div>
-            <div class="column" id="column6"></div>
-            <div class="column" id="column7"></div>
-            <div class="column" id="column8"></div>
-            <div class="column" id="column9"></div>
-            <div class="column" id="column10"></div>
-        </div>
-        <div class="row" id="row6">
-            <div class="column" id="column1"></div>
-            <div class="column" id="column2"></div>
-            <div class="column" id="column3"></div>
-            <div class="column" id="column4"></div>
-            <div class="column" id="column5"></div>
-            <div class="column" id="column6"></div>
-            <div class="column" id="column7"></div>
-            <div class="column" id="column8"></div>
-            <div class="column" id="column9"></div>
-            <div class="column" id="column10"></div>
-        </div>
-        <div class="row" id="row7">
-            <div class="column" id="column1"></div>
-            <div class="column" id="column2"></div>
-            <div class="column" id="column3"></div>
-            <div class="column" id="column4"></div>
-            <div class="column" id="column5"></div>
-            <div class="column" id="column6"></div>
-            <div class="column" id="column7"></div>
-            <div class="column" id="column8"></div>
-            <div class="column" id="column9"></div>
-            <div class="column" id="column10"></div>
-        </div>
-        <div class="row" id="row8">
-            <div class="column" id="column1"></div>
-            <div class="column" id="column2"></div>
-            <div class="column" id="column3"></div>
-            <div class="column" id="column4"></div>
-            <div class="column" id="column5"></div>
-            <div class="column" id="column6"></div>
-            <div class="column" id="column7"></div>
-            <div class="column" id="column8"></div>
-            <div class="column" id="column9"></div>
-            <div class="column" id="column10"></div>
-        </div>
-        <div class="row" id="row9">
-            <div class="column" id="column1"></div>
-            <div class="column" id="column2"></div>
-            <div class="column" id="column3"></div>
-            <div class="column" id="column4"></div>
-            <div class="column" id="column5"></div>
-            <div class="column" id="column6"></div>
-            <div class="column" id="column7"></div>
-            <div class="column" id="column8"></div>
-            <div class="column" id="column9"></div>
-            <div class="column" id="column10"></div>
-        </div>
-        <div class="row" id="row10">
-            <div class="column" id="column1"></div>
-            <div class="column" id="column2"></div>
-            <div class="column" id="column3"></div>
-            <div class="column" id="column4"></div>
-            <div class="column" id="column5"></div>
-            <div class="column" id="column6"></div>
-            <div class="column" id="column7"></div>
-            <div class="column" id="column8"></div>
-            <div class="column" id="column9"></div>
-            <div class="column" id="column10"></div>
-        </div>
-        <div class="row" id="row11">
-            <div class="column" id="column1"></div>
-            <div class="column" id="column2"></div>
-            <div class="column" id="column3"></div>
-            <div class="column" id="column4"></div>
-            <div class="column" id="column5"></div>
-            <div class="column" id="column6"></div>
-            <div class="column" id="column7"></div>
-            <div class="column" id="column8"></div>
-            <div class="column" id="column9"></div>
-            <div class="column" id="column10"></div>
-        </div>
-        <div class="row" id="row12">
-            <div class="column" id="column1"></div>
-            <div class="column" id="column2"></div>
-            <div class="column" id="column3"></div>
-            <div class="column" id="column4"></div>
-            <div class="column" id="column5"></div>
-            <div class="column" id="column6"></div>
-            <div class="column" id="column7"></div>
-            <div class="column" id="column8"></div>
-            <div class="column" id="column9"></div>
-            <div class="column" id="column10"></div>
-        </div>
-        <div class="row" id="row13">
-            <div class="column" id="column1"></div>
-            <div class="column" id="column2"></div>
-            <div class="column" id="column3"></div>
-            <div class="column" id="column4"></div>
-            <div class="column" id="column5"></div>
-            <div class="column" id="column6"></div>
-            <div class="column" id="column7"></div>
-            <div class="column" id="column8"></div>
-            <div class="column" id="column9"></div>
-            <div class="column" id="column10"></div>
-        </div>
-        <div class="row" id="row14">
-            <div class="column" id="column1"></div>
-            <div class="column" id="column2"></div>
-            <div class="column" id="column3"></div>
-            <div class="column" id="column4"></div>
-            <div class="column" id="column5"></div>
-            <div class="column" id="column6"></div>
-            <div class="column" id="column7"></div>
-            <div class="column" id="column8"></div>
-            <div class="column" id="column9"></div>
-            <div class="column" id="column10"></div>
-        </div>
-        <div class="row" id="row15">
-            <div class="column" id="column1"></div>
-            <div class="column" id="column2"></div>
-            <div class="column" id="column3"></div>
-            <div class="column" id="column4"></div>
-            <div class="column" id="column5"></div>
-            <div class="column" id="column6"></div>
-            <div class="column" id="column7"></div>
-            <div class="column" id="column8"></div>
-            <div class="column" id="column9"></div>
-            <div class="column" id="column10"></div>
-        </div>
-        <div class="row" id="row16">
-            <div class="column" id="column1"></div>
-            <div class="column" id="column2"></div>
-            <div class="column" id="column3"></div>
-            <div class="column" id="column4"></div>
-            <div class="column" id="column5"></div>
-            <div class="column" id="column6"></div>
-            <div class="column" id="column7"></div>
-            <div class="column" id="column8"></div>
-            <div class="column" id="column9"></div>
-            <div class="column" id="column10"></div>
-        </div>
-        <div class="row" id="row17">
-            <div class="column" id="column1"></div>
-            <div class="column" id="column2"></div>
-            <div class="column" id="column3"></div>
-            <div class="column" id="column4"></div>
-            <div class="column" id="column5"></div>
-            <div class="column" id="column6"></div>
-            <div class="column" id="column7"></div>
-            <div class="column" id="column8"></div>
-            <div class="column" id="column9"></div>
-            <div class="column" id="column10"></div>
-        </div>
-        <div class="row" id="row18">
-            <div class="column" id="column1"></div>
-            <div class="column" id="column2"></div>
-            <div class="column" id="column3"></div>
-            <div class="column" id="column4"></div>
-            <div class="column" id="column5"></div>
-            <div class="column" id="column6"></div>
-            <div class="column" id="column7"></div>
-            <div class="column" id="column8"></div>
-            <div class="column" id="column9"></div>
-            <div class="column" id="column10"></div>
-        </div>
-        <div class="row" id="row19">
-            <div class="column" id="column1"></div>
-            <div class="column" id="column2"></div>
-            <div class="column" id="column3"></div>
-            <div class="column" id="column4"></div>
-            <div class="column" id="column5"></div>
-            <div class="column" id="column6"></div>
-            <div class="column" id="column7"></div>
-            <div class="column" id="column8"></div>
-            <div class="column" id="column9"></div>
-            <div class="column" id="column10"></div>
-        </div>
-        <div class="row" id="row20">
-            <div class="column" id="column1"></div>
-            <div class="column" id="column2"></div>
-            <div class="column" id="column3"></div>
-            <div class="column" id="column4"></div>
-            <div class="column" id="column5"></div>
-            <div class="column" id="column6"></div>
-            <div class="column" id="column7"></div>
-            <div class="column" id="column8"></div>
-            <div class="column" id="column9"></div>
-            <div class="column" id="column10"></div>
-        </div>
+        <div id="board">
+            <div id="score-text">Score<p id="score">0</p></div>
+            <div class="row" id="row1">
+                <div class="column" id="column1"></div>
+                <div class="column" id="column2"></div>
+                <div class="column" id="column3"></div>
+                <div class="column" id="column4"></div>
+                <div class="column" id="column5"></div>
+                <div class="column" id="column6"></div>
+                <div class="column" id="column7"></div>
+                <div class="column" id="column8"></div>
+                <div class="column" id="column9"></div>
+                <div class="column" id="column10"></div>
+            </div>
+            <div class="row" id="row2">
+                <div class="column" id="column1"></div>
+                <div class="column" id="column2"></div>
+                <div class="column" id="column3"></div>
+                <div class="column" id="column4"></div>
+                <div class="column" id="column5"></div>
+                <div class="column" id="column6"></div>
+                <div class="column" id="column7"></div>
+                <div class="column" id="column8"></div>
+                <div class="column" id="column9"></div>
+                <div class="column" id="column10"></div>
+            </div>
+            <div class="row" id="row3">
+                <div class="column" id="column1"></div>
+                <div class="column" id="column2"></div>
+                <div class="column" id="column3"></div>
+                <div class="column" id="column4"></div>
+                <div class="column" id="column5"></div>
+                <div class="column" id="column6"></div>
+                <div class="column" id="column7"></div>
+                <div class="column" id="column8"></div>
+                <div class="column" id="column9"></div>
+                <div class="column" id="column10"></div>
+            </div>
+            <div class="row" id="row4">
+                <div class="column" id="column1"></div>
+                <div class="column" id="column2"></div>
+                <div class="column" id="column3"></div>
+                <div class="column" id="column4"></div>
+                <div class="column" id="column5"></div>
+                <div class="column" id="column6"></div>
+                <div class="column" id="column7"></div>
+                <div class="column" id="column8"></div>
+                <div class="column" id="column9"></div>
+                <div class="column" id="column10"></div>
+            </div>
+            <div class="row" id="row5">
+                <div class="column" id="column1"></div>
+                <div class="column" id="column2"></div>
+                <div class="column" id="column3"></div>
+                <div class="column" id="column4"></div>
+                <div class="column" id="column5"></div>
+                <div class="column" id="column6"></div>
+                <div class="column" id="column7"></div>
+                <div class="column" id="column8"></div>
+                <div class="column" id="column9"></div>
+                <div class="column" id="column10"></div>
+            </div>
+            <div class="row" id="row6">
+                <div class="column" id="column1"></div>
+                <div class="column" id="column2"></div>
+                <div class="column" id="column3"></div>
+                <div class="column" id="column4"></div>
+                <div class="column" id="column5"></div>
+                <div class="column" id="column6"></div>
+                <div class="column" id="column7"></div>
+                <div class="column" id="column8"></div>
+                <div class="column" id="column9"></div>
+                <div class="column" id="column10"></div>
+            </div>
+            <div class="row" id="row7">
+                <div class="column" id="column1"></div>
+                <div class="column" id="column2"></div>
+                <div class="column" id="column3"></div>
+                <div class="column" id="column4"></div>
+                <div class="column" id="column5"></div>
+                <div class="column" id="column6"></div>
+                <div class="column" id="column7"></div>
+                <div class="column" id="column8"></div>
+                <div class="column" id="column9"></div>
+                <div class="column" id="column10"></div>
+            </div>
+            <div class="row" id="row8">
+                <div class="column" id="column1"></div>
+                <div class="column" id="column2"></div>
+                <div class="column" id="column3"></div>
+                <div class="column" id="column4"></div>
+                <div class="column" id="column5"></div>
+                <div class="column" id="column6"></div>
+                <div class="column" id="column7"></div>
+                <div class="column" id="column8"></div>
+                <div class="column" id="column9"></div>
+                <div class="column" id="column10"></div>
+            </div>
+            <div class="row" id="row9">
+                <div class="column" id="column1"></div>
+                <div class="column" id="column2"></div>
+                <div class="column" id="column3"></div>
+                <div class="column" id="column4"></div>
+                <div class="column" id="column5"></div>
+                <div class="column" id="column6"></div>
+                <div class="column" id="column7"></div>
+                <div class="column" id="column8"></div>
+                <div class="column" id="column9"></div>
+                <div class="column" id="column10"></div>
+            </div>
+            <div class="row" id="row10">
+                <div class="column" id="column1"></div>
+                <div class="column" id="column2"></div>
+                <div class="column" id="column3"></div>
+                <div class="column" id="column4"></div>
+                <div class="column" id="column5"></div>
+                <div class="column" id="column6"></div>
+                <div class="column" id="column7"></div>
+                <div class="column" id="column8"></div>
+                <div class="column" id="column9"></div>
+                <div class="column" id="column10"></div>
+            </div>
+            <div class="row" id="row11">
+                <div class="column" id="column1"></div>
+                <div class="column" id="column2"></div>
+                <div class="column" id="column3"></div>
+                <div class="column" id="column4"></div>
+                <div class="column" id="column5"></div>
+                <div class="column" id="column6"></div>
+                <div class="column" id="column7"></div>
+                <div class="column" id="column8"></div>
+                <div class="column" id="column9"></div>
+                <div class="column" id="column10"></div>
+            </div>
+            <div class="row" id="row12">
+                <div class="column" id="column1"></div>
+                <div class="column" id="column2"></div>
+                <div class="column" id="column3"></div>
+                <div class="column" id="column4"></div>
+                <div class="column" id="column5"></div>
+                <div class="column" id="column6"></div>
+                <div class="column" id="column7"></div>
+                <div class="column" id="column8"></div>
+                <div class="column" id="column9"></div>
+                <div class="column" id="column10"></div>
+            </div>
+            <div class="row" id="row13">
+                <div class="column" id="column1"></div>
+                <div class="column" id="column2"></div>
+                <div class="column" id="column3"></div>
+                <div class="column" id="column4"></div>
+                <div class="column" id="column5"></div>
+                <div class="column" id="column6"></div>
+                <div class="column" id="column7"></div>
+                <div class="column" id="column8"></div>
+                <div class="column" id="column9"></div>
+                <div class="column" id="column10"></div>
+            </div>
+            <div class="row" id="row14">
+                <div class="column" id="column1"></div>
+                <div class="column" id="column2"></div>
+                <div class="column" id="column3"></div>
+                <div class="column" id="column4"></div>
+                <div class="column" id="column5"></div>
+                <div class="column" id="column6"></div>
+                <div class="column" id="column7"></div>
+                <div class="column" id="column8"></div>
+                <div class="column" id="column9"></div>
+                <div class="column" id="column10"></div>
+            </div>
+            <div class="row" id="row15">
+                <div class="column" id="column1"></div>
+                <div class="column" id="column2"></div>
+                <div class="column" id="column3"></div>
+                <div class="column" id="column4"></div>
+                <div class="column" id="column5"></div>
+                <div class="column" id="column6"></div>
+                <div class="column" id="column7"></div>
+                <div class="column" id="column8"></div>
+                <div class="column" id="column9"></div>
+                <div class="column" id="column10"></div>
+            </div>
+            <div class="row" id="row16">
+                <div class="column" id="column1"></div>
+                <div class="column" id="column2"></div>
+                <div class="column" id="column3"></div>
+                <div class="column" id="column4"></div>
+                <div class="column" id="column5"></div>
+                <div class="column" id="column6"></div>
+                <div class="column" id="column7"></div>
+                <div class="column" id="column8"></div>
+                <div class="column" id="column9"></div>
+                <div class="column" id="column10"></div>
+            </div>
+            <div class="row" id="row17">
+                <div class="column" id="column1"></div>
+                <div class="column" id="column2"></div>
+                <div class="column" id="column3"></div>
+                <div class="column" id="column4"></div>
+                <div class="column" id="column5"></div>
+                <div class="column" id="column6"></div>
+                <div class="column" id="column7"></div>
+                <div class="column" id="column8"></div>
+                <div class="column" id="column9"></div>
+                <div class="column" id="column10"></div>
+            </div>
+            <div class="row" id="row18">
+                <div class="column" id="column1"></div>
+                <div class="column" id="column2"></div>
+                <div class="column" id="column3"></div>
+                <div class="column" id="column4"></div>
+                <div class="column" id="column5"></div>
+                <div class="column" id="column6"></div>
+                <div class="column" id="column7"></div>
+                <div class="column" id="column8"></div>
+                <div class="column" id="column9"></div>
+                <div class="column" id="column10"></div>
+            </div>
+            <div class="row" id="row19">
+                <div class="column" id="column1"></div>
+                <div class="column" id="column2"></div>
+                <div class="column" id="column3"></div>
+                <div class="column" id="column4"></div>
+                <div class="column" id="column5"></div>
+                <div class="column" id="column6"></div>
+                <div class="column" id="column7"></div>
+                <div class="column" id="column8"></div>
+                <div class="column" id="column9"></div>
+                <div class="column" id="column10"></div>
+            </div>
+            <div class="row" id="row20">
+                <div class="column" id="column1"></div>
+                <div class="column" id="column2"></div>
+                <div class="column" id="column3"></div>
+                <div class="column" id="column4"></div>
+                <div class="column" id="column5"></div>
+                <div class="column" id="column6"></div>
+                <div class="column" id="column7"></div>
+                <div class="column" id="column8"></div>
+                <div class="column" id="column9"></div>
+                <div class="column" id="column10"></div>
+            </div>
+            <button onclick="startGame()">Start</button>
+        
+        
     </div>
-    <button onclick="startGame()">Start</button>
+    <div id="next">
+        <div id="next-text">Next</div>
+        <div class="next-piece"></div>
+        <div class="next-piece"></div>
+        <div class="next-piece"></div>
+        <div class="next-piece"></div>
+        <div class="next-piece"></div>
+        <div class="next-piece"></div>
+    </div>
+</div>
 <script src="script.js"></script>
 </body>
 </html>

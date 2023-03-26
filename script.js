@@ -7,7 +7,7 @@ class Iblock {
             { x: 3, y: 1 },
             { x: 4, y: 1 },
         ];
-        this.color = "blue";
+        this.color = "cyan";
         this.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
             cell.innerHTML = "X";
@@ -24,7 +24,7 @@ class Jblock {
             { x: 2, y: 2 },
             { x: 3, y: 2 },
         ];
-        this.color = "cyan";
+        this.color = "blue";
         this.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
             cell.innerHTML = "X";
@@ -75,7 +75,7 @@ class Sblock {
             { x: 2, y: 1 },
             { x: 3, y: 1 },
         ];
-        this.color = "green";
+        this.color = "lime";
         this.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
             cell.innerHTML = "X";
@@ -191,8 +191,8 @@ function moveBlockDown() {
         activeBlock.tiles.forEach((element) => {//ta pętla wymazuje blok 
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
             cell.innerHTML = "";
-            cell.style.color = "white";
-            cell.style.backgroundColor = "white";
+            cell.style.color = "";
+            cell.style.backgroundColor = "";
             element.y = element.y + 1;
         });
         activeBlock.tiles.forEach((element) => {//ta rysuje go odnowa w nowym miejscu
@@ -222,8 +222,8 @@ function moveBlockRight() {//wyglądaa praktyznie tak samo jak move down
         activeBlock.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
             cell.innerHTML = "";
-            cell.style.color = "white";
-            cell.style.backgroundColor = "white";
+            cell.style.color = "";
+            cell.style.backgroundColor = "";
             element.x = element.x + 1;
         });
         activeBlock.tiles.forEach((element) => {
@@ -251,8 +251,8 @@ function moveBlockLeft() {//to samo co move right
         activeBlock.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
             cell.innerHTML = "";
-            cell.style.color = "white";
-            cell.style.backgroundColor = "white";
+            cell.style.color = "";
+            cell.style.backgroundColor = "";
             element.x = element.x - 1;
         });
         activeBlock.tiles.forEach((element) => {
