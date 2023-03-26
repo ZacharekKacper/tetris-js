@@ -1,98 +1,128 @@
 //klasy z blokami 7 ich w sumie jest
 class Iblock {
     constructor() {
-        this.tiles = [
-            { x: 1, y: 1 },
-            { x: 2, y: 1 },
-            { x: 3, y: 1 },
-            { x: 4, y: 1 },
-        ];
         this.color = "cyan";
+        this.tiles = [
+            { x: 1, y: 1, color:this.color},
+            { x: 2, y: 1, color:this.color},
+            { x: 3, y: 1, color:this.color},
+            { x: 4, y: 1, color:this.color},
+        ];
         this.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
             cell.innerHTML = "X";
             cell.style.color = this.color;
             cell.style.backgroundColor = this.color;
         });
+    }
+    rotateLeft(){
+
+    }
+    rotateRight(){
+        
     }
 }
 class Jblock {
     constructor() {
-        this.tiles = [
-            { x: 1, y: 1 },
-            { x: 1, y: 2 },
-            { x: 2, y: 2 },
-            { x: 3, y: 2 },
-        ];
         this.color = "blue";
+        this.tiles = [
+            { x: 1, y: 1, color:this.color},
+            { x: 1, y: 2, color:this.color},
+            { x: 2, y: 2, color:this.color},
+            { x: 3, y: 2, color:this.color},
+        ];
         this.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
             cell.innerHTML = "X";
             cell.style.color = this.color;
             cell.style.backgroundColor = this.color;
         });
+    }
+    rotateLeft(){
+
+    }
+    rotateRight(){
+
     }
 }
 class Lblock {
     constructor() {
-        this.tiles = [
-            { x: 3, y: 1 },
-            { x: 1, y: 2 },
-            { x: 2, y: 2 },
-            { x: 3, y: 2 },
-        ];
         this.color = "orange";
+        this.tiles = [
+            { x: 3, y: 1, color:this.color},
+            { x: 1, y: 2, color:this.color},
+            { x: 2, y: 2, color:this.color},
+            { x: 3, y: 2, color:this.color},
+        ];
         this.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
             cell.innerHTML = "X";
             cell.style.color = this.color;
             cell.style.backgroundColor = this.color;
         });
+    }
+    rotateLeft(){
+
+    }
+    rotateRight(){
+        
     }
 }
 class Oblock {
     constructor() {
-        this.tiles = [
-            { x: 1, y: 1 },
-            { x: 1, y: 2 },
-            { x: 2, y: 1 },
-            { x: 2, y: 2 },
-        ];
         this.color = "yellow";
+        this.tiles = [
+            { x: 1, y: 1, color:this.color},
+            { x: 1, y: 2, color:this.color},
+            { x: 2, y: 1, color:this.color},
+            { x: 2, y: 2, color:this.color},
+        ];
         this.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
             cell.innerHTML = "X";
             cell.style.color = this.color;
             cell.style.backgroundColor = this.color;
         });
+    }
+    rotateLeft(){
+
+    }
+    rotateRight(){
+        
     }
 }
 class Sblock {
     constructor() {
-        this.tiles = [
-            { x: 1, y: 2 },
-            { x: 2, y: 2 },
-            { x: 2, y: 1 },
-            { x: 3, y: 1 },
-        ];
         this.color = "lime";
+        this.tiles = [
+            { x: 1, y: 2, color:this.color },
+            { x: 2, y: 2, color:this.color },
+            { x: 2, y: 1, color:this.color },
+            { x: 3, y: 1, color:this.color },
+        ];
         this.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
             cell.innerHTML = "X";
             cell.style.color = this.color;
             cell.style.backgroundColor = this.color;
         });
+    }
+    rotateLeft(){
+
+    }
+    rotateRight(){
+        
     }
 }
 class Tblock {
     constructor() {
-        this.tiles = [
-            { x: 1, y: 2 },
-            { x: 2, y: 2 },
-            { x: 3, y: 2 },
-            { x: 2, y: 1 },
-        ];
         this.color = "purple";
+        this.tiles = [
+            { x: 1, y: 2, color:this.color},
+            { x: 2, y: 2, color:this.color},
+            { x: 3, y: 2, color:this.color},
+            { x: 2, y: 1, color:this.color},
+        ];
         this.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
             cell.innerHTML = "X";
@@ -100,22 +130,34 @@ class Tblock {
             cell.style.backgroundColor = this.color;
         });
     }
+    rotateLeft(){
+
+    }
+    rotateRight(){
+        
+    }
 }
 class Zblock {
     constructor() {
-        this.tiles = [
-            { x: 1, y: 1 },
-            { x: 2, y: 1 },
-            { x: 2, y: 2 },
-            { x: 3, y: 2 },
-        ];
         this.color = "red";
+        this.tiles = [
+            { x: 1, y: 1 ,color:this.color},
+            { x: 2, y: 1 ,color:this.color},
+            { x: 2, y: 2 ,color:this.color},
+            { x: 3, y: 2 ,color:this.color},
+        ];
         this.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
             cell.innerHTML = "X";
             cell.style.color = this.color;
             cell.style.backgroundColor = this.color;
         });
+    }
+    rotateLeft(){
+
+    }
+    rotateRight(){
+        
     }
 }
 //globalne zmienne
@@ -204,6 +246,7 @@ function moveBlockDown() {
     } else {
         // jeśli blok nie może dalej iść w dół to dodaje jego kordy do tablicy staticCords
         addToStaticBlocks();
+        checkFullLines();
     }
 }
 function moveBlockRight() {//wyglądaa praktyznie tak samo jak move down 
@@ -268,4 +311,48 @@ function addToStaticBlocks() {//dodaje kordy elementu do tablicy z statycznymi k
         staticCords.push(element);
     });
     createNewBlock();
+    checkFullLines();
+}
+function checkFullLines(){
+    // ---------------------------- to działa ale prawie idk czemu rozjebane to jest
+    // let lastStaticCords = [
+    //     staticCords[staticCords.length-1],
+    //     staticCords[staticCords.length-2],
+    //     staticCords[staticCords.length-3],
+    //     staticCords[staticCords.length-4]
+    // ]
+    // let yCordinates = [];
+    // lastStaticCords.forEach(element => {
+    //     yCordinates.push(element.y);
+    // });
+    // yCordinates = new Set(yCordinates);
+    // console.log(staticCords);
+    // yCordinates.forEach(element => {
+    //     let row = document.querySelectorAll(`#row${element} div`);
+    //     let count = 0
+    //     row.forEach(cell => {
+    //         if(cell.innerHTML != ""){
+    //             count++;
+    //         }
+    //     })
+    //     if(count==10){
+    //         for (let i = 0; i < staticCords.length; i++) {
+    //             if(staticCords[i].y == element){
+    //                 staticCords.splice(i,1);
+    //             }
+    //             else if(staticCords[i].y < element){
+    //                 let cell = document.querySelector(`#row${staticCords[i].y} #column${staticCords[i].x}`);
+    //                 cell.innerHTML = "";
+    //                 cell.style.color = "";
+    //                 cell.style.backgroundColor = "";
+    //                 cell = document.querySelector(`#row${staticCords[i].y + 1} #column${staticCords[i].x}`);
+    //                 staticCords[i].y + 1
+    //                 cell.innerHTML = "X";
+    //                 cell.style.color = staticCords[i].color;
+    //                 cell.style.backgroundColor = staticCords[i].color;
+    //             }
+    //         }
+    //     }
+        
+    // })
 }
