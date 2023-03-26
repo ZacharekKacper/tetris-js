@@ -1,0 +1,16 @@
+#game-container{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.column{
+    border: 1px solid springgreen ;
+    width: 40px;
+    height: 40px;
+}
+.row{
+    border: 1px solid black;
+    display: flex;
+    width: 400px;
+}
