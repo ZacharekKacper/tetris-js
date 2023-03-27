@@ -36,7 +36,7 @@ html, body {
         rgb(204, 0, 143),
         rgb(123, 1, 180)
     ); */
-    background: url(background.svg);
+    background: url(images/background.svg);
     /* background-position: left bottom right bottom; */
     /* background-repeat: no-repeat; */
     background-size: 300%;
@@ -90,6 +90,7 @@ html, body {
     background-color: #191919;
     height: 100px;
     width: 100px;
+    color: white;
 }
 #hold-text, #next-text, #score-text {
     height: 50px;
@@ -125,8 +126,35 @@ html, body {
 #board {
     width: fit-content;
     margin-left: 0;
+    text-align: center;
 }
 p {
     margin: 0;
     font-size: 15px;
+}
+button {
+    background-color: #191919;
+    color: white;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 20px;
+    width: 125px;
+    height: 40px;
+    border: none;
+    margin: 5px;
+    transition: .5s;
+    border-radius: 6px;
+}
+button:hover {
+    color: rgb(190, 190, 190);
+}
+button:active {
+    color: #3f3f3f;
+}
+.next-piece, .hold-piece {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+img {
+    width: 90%;
 }

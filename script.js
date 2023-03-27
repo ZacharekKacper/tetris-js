@@ -1,7 +1,7 @@
 //klasy z blokami 7 ich w sumie jest
 class Iblock {
     constructor() {
-        this.color = "cyan";
+        this.color = "#1ae1fc";
         this.tiles = [
             { x: 1, y: 1, color:this.color},
             { x: 2, y: 1, color:this.color},
@@ -10,7 +10,7 @@ class Iblock {
         ];
         this.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
-            cell.innerHTML = "X";
+            // cell.innerHTML = "X";
             cell.style.color = this.color;
             cell.style.backgroundColor = this.color;
         });
@@ -18,7 +18,7 @@ class Iblock {
 }
 class Jblock {
     constructor() {
-        this.color = "blue";
+        this.color = "#0a34bd";
         this.tiles = [
             { x: 1, y: 1, color:this.color},
             { x: 2, y: 2, color:this.color},
@@ -27,7 +27,7 @@ class Jblock {
         ];
         this.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
-            cell.innerHTML = "X";
+            // cell.innerHTML = "X";
             cell.style.color = this.color;
             cell.style.backgroundColor = this.color;
         });
@@ -35,7 +35,7 @@ class Jblock {
 }
 class Lblock {
     constructor() {
-        this.color = "orange";
+        this.color = "#ff8800";
         this.tiles = [
             { x: 3, y: 1, color:this.color},
             { x: 2, y: 2, color:this.color},
@@ -44,7 +44,7 @@ class Lblock {
         ];
         this.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
-            cell.innerHTML = "X";
+            // cell.innerHTML = "X";
             cell.style.color = this.color;
             cell.style.backgroundColor = this.color;
         });
@@ -52,7 +52,7 @@ class Lblock {
 }
 class Oblock {
     constructor() {
-        this.color = "yellow";
+        this.color = "#ffe600";
         this.tiles = [
             { x: 1, y: 1, color:this.color},
             { x: 1, y: 2, color:this.color},
@@ -61,7 +61,7 @@ class Oblock {
         ];
         this.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
-            cell.innerHTML = "X";
+            // cell.innerHTML = "X";
             cell.style.color = this.color;
             cell.style.backgroundColor = this.color;
         });
@@ -69,7 +69,7 @@ class Oblock {
 }
 class Sblock {
     constructor() {
-        this.color = "lime";
+        this.color = "#0cd10c";
         this.tiles = [
             { x: 1, y: 2, color:this.color },
             { x: 2, y: 2, color:this.color },
@@ -78,7 +78,7 @@ class Sblock {
         ];
         this.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
-            cell.innerHTML = "X";
+            // cell.innerHTML = "X";
             cell.style.color = this.color;
             cell.style.backgroundColor = this.color;
         });
@@ -86,7 +86,7 @@ class Sblock {
 }
 class Tblock {
     constructor() {
-        this.color = "purple";
+        this.color = "#961396";
         this.tiles = [
             { x: 1, y: 2, color:this.color},
             { x: 2, y: 2, color:this.color},
@@ -95,7 +95,7 @@ class Tblock {
         ];
         this.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
-            cell.innerHTML = "X";
+            // cell.innerHTML = "X";
             cell.style.color = this.color;
             cell.style.backgroundColor = this.color;
         });
@@ -103,7 +103,7 @@ class Tblock {
 }
 class Zblock {
     constructor() {
-        this.color = "red";
+        this.color = "#eb0f0f";
         this.tiles = [
             { x: 1, y: 1 ,color:this.color},
             { x: 2, y: 1 ,color:this.color},
@@ -112,7 +112,7 @@ class Zblock {
         ];
         this.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
-            cell.innerHTML = "X";
+            // cell.innerHTML = "X";
             cell.style.color = this.color;
             cell.style.backgroundColor = this.color;
         });
@@ -126,9 +126,12 @@ window.addEventListener("keydown", clickEvent);
 
 //funkcja do startu gry
 function startGame() {
-    gameRunning = true;
-    createNewBlock();
-    gameTick();
+    if (!gameRunning)
+    {
+        gameRunning = true;
+        createNewBlock();
+        gameTick();
+    }
 }
 function stopGame(){
     staticCords = [];
@@ -153,21 +156,35 @@ function gameTick() {
 //tworzy nowy blok z 7 dostępnych
 //todo: trzeba tu dodać by tworzyło ich więcej by w kolejce pokazywało
 function createNewBlock() {
-    let randomNumber = Math.floor(Math.random() * 7 + 1);
-    switch (randomNumber) {
-        case 1:activeBlock = new Iblock();break;
-        case 2:activeBlock = new Jblock();break;
-        case 3:activeBlock = new Lblock();break;
-        case 4:activeBlock = new Oblock();break;
-        case 5:activeBlock = new Sblock();break;
-        case 6:activeBlock = new Tblock();break;
-        case 7:activeBlock = new Zblock();break;
+    displayNextPieces()
+    switch (shufflePieces()) {
+        case 1:
+        case 2:
+            activeBlock = new Iblock();break;
+        case 3:
+        case 4:
+            activeBlock = new Jblock();break;
+        case 5:
+        case 6:
+            activeBlock = new Lblock();break;
+        case 7:
+        case 8:
+            activeBlock = new Oblock();break;
+        case 9:
+        case 10:
+            activeBlock = new Sblock();break;
+        case 11:
+        case 12:
+            activeBlock = new Tblock();break;
+        case 13:
+        case 14:
+            activeBlock = new Zblock();break;
     }
 }
 function drawBlock(){
     activeBlock.tiles.forEach((element) => {
         let cell = document.querySelector(`#row${element.y} #column${element.x}`);
-        cell.innerHTML = "X";
+        // cell.innerHTML = "X";
         cell.style.color = activeBlock.color;
         cell.style.backgroundColor = activeBlock.color;
     });
@@ -383,10 +400,63 @@ function deleteFullLines(){
            staticCords.forEach((element) => {
              console.log(element);
              let cell = document.querySelector(`#row${element.y} #column${element.x}`);
-             cell.innerHTML = "X";
+            //  cell.innerHTML = "X";
              cell.style.color = element.color;
              cell.style.backgroundColor = element.color;
          });
     });
 
 }
+let pieces = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+shuffle(pieces);
+
+function shufflePieces()
+{
+    if (pieces.length <= 7)
+    {
+        let a =[];
+        for (let i = 1; i <= 14; i++) {
+            if (!pieces.includes(i))
+            {
+                a.push(i);
+            }
+        }
+        pieces = pieces.concat(shuffle(a));
+    }
+
+    let p = pieces[0];
+    pieces.shift();
+    // console.log(p)
+    return p;
+}
+
+let pieceImages = ["Ipiece.png", "Ipiece.png", "Jpiece.png", "Jpiece.png", "Lpiece.png", "Lpiece.png", "Opiece.png", "Opiece.png", "Spiece.png", "Spiece.png", "Tpiece.png", "Tpiece.png", "Zpiece.png", "Zpiece.png"]
+
+function displayNextPieces()
+{
+    let next = document.querySelectorAll(".next-piece");
+    let srcs = document.querySelectorAll(".nextP");
+    for (let i = 0; i < next.length; i++) {
+        // next[i].innerHTML = pieces[i+1];
+        // console.log(srcs[i].getAttribute('src'))
+        // console.log(pieceImages[pieces[i]])
+        srcs[i].src = ("images/" + pieceImages[pieces[i+1] - 1]);
+    }
+}
+function shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+  
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+  
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  
+    return array;
+  }
