@@ -136,6 +136,13 @@ function startGame() {
 function stopGame(){
     staticCords = [];
     activeBlock = "";
+    shuffle(pieces);
+    
+    let next = document.querySelectorAll(".nextP");
+    next.forEach( element =>{
+        element.src = "";
+    })
+
     let toClear = document.querySelectorAll(".column");
     toClear.forEach(element =>{
         element.style.color = "";
