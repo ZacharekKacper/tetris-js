@@ -3,10 +3,10 @@ class Iblock {
     constructor() {
         this.color = "#1ae1fc";
         this.tiles = [
-            { x: 1, y: 1, color:this.color},
-            { x: 2, y: 1, color:this.color},
-            { x: 3, y: 1, color:this.color},
-            { x: 4, y: 1, color:this.color}
+            { x: 1+3, y: 1, color:this.color},
+            { x: 2+3, y: 1, color:this.color},
+            { x: 3+3, y: 1, color:this.color},
+            { x: 4+3, y: 1, color:this.color}
         ];
         this.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
@@ -20,10 +20,10 @@ class Jblock {
     constructor() {
         this.color = "#0a34bd";
         this.tiles = [
-            { x: 1, y: 1, color:this.color},
-            { x: 2, y: 2, color:this.color},
-            { x: 1, y: 2, color:this.color},
-            { x: 3, y: 2, color:this.color}
+            { x: 1+3, y: 1, color:this.color},
+            { x: 2+3, y: 2, color:this.color},
+            { x: 1+3, y: 2, color:this.color},
+            { x: 3+3, y: 2, color:this.color}
         ];
         this.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
@@ -37,10 +37,10 @@ class Lblock {
     constructor() {
         this.color = "#ff8800";
         this.tiles = [
-            { x: 3, y: 1, color:this.color},
-            { x: 2, y: 2, color:this.color},
-            { x: 1, y: 2, color:this.color},
-            { x: 3, y: 2, color:this.color}
+            { x: 3+3, y: 1, color:this.color},
+            { x: 2+3, y: 2, color:this.color},
+            { x: 1+3, y: 2, color:this.color},
+            { x: 3+3, y: 2, color:this.color}
         ];
         this.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
@@ -54,10 +54,10 @@ class Oblock {
     constructor() {
         this.color = "#ffe600";
         this.tiles = [
-            { x: 1, y: 1, color:this.color},
-            { x: 1, y: 2, color:this.color},
-            { x: 2, y: 1, color:this.color},
-            { x: 2, y: 2, color:this.color}
+            { x: 1+4, y: 1, color:this.color},
+            { x: 1+4, y: 2, color:this.color},
+            { x: 2+4, y: 1, color:this.color},
+            { x: 2+4, y: 2, color:this.color}
         ];
         this.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
@@ -71,10 +71,10 @@ class Sblock {
     constructor() {
         this.color = "#0cd10c";
         this.tiles = [
-            { x: 1, y: 2, color:this.color },
-            { x: 2, y: 2, color:this.color },
-            { x: 2, y: 1, color:this.color },
-            { x: 3, y: 1, color:this.color }
+            { x: 1+3, y: 2, color:this.color },
+            { x: 2+3, y: 2, color:this.color },
+            { x: 2+3, y: 1, color:this.color },
+            { x: 3+3, y: 1, color:this.color }
         ];
         this.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
@@ -88,10 +88,10 @@ class Tblock {
     constructor() {
         this.color = "#961396";
         this.tiles = [
-            { x: 1, y: 2, color:this.color},
-            { x: 2, y: 2, color:this.color},
-            { x: 3, y: 2, color:this.color},
-            { x: 2, y: 1, color:this.color}
+            { x: 1+3, y: 2, color:this.color},
+            { x: 2+3, y: 2, color:this.color},
+            { x: 3+3, y: 2, color:this.color},
+            { x: 2+3, y: 1, color:this.color}
         ];
         this.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
@@ -105,10 +105,10 @@ class Zblock {
     constructor() {
         this.color = "#eb0f0f";
         this.tiles = [
-            { x: 1, y: 1 ,color:this.color},
-            { x: 2, y: 1 ,color:this.color},
-            { x: 2, y: 2 ,color:this.color},
-            { x: 3, y: 2 ,color:this.color}
+            { x: 1+3, y: 1 ,color:this.color},
+            { x: 2+3, y: 1 ,color:this.color},
+            { x: 2+3, y: 2 ,color:this.color},
+            { x: 3+3, y: 2 ,color:this.color}
         ];
         this.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
