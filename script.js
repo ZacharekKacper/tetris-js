@@ -118,11 +118,21 @@ class Zblock {
         });
     }
 }
+class GhostBlock {
+    constructor(color , tiles) {
+        this.color = color
+        this.tiles = tiles
+    }
+}
 //globalne zmienne
 let activeBlock = "";
+let ghostBlock = "";
 let gameRunning = false;
 let staticCords = [];
 let alreadyPressedHold = true;
+let hardDropUsed = false;
+let ghostPlaced = false;
+
 
 window.addEventListener("keydown", clickEvent);
 
@@ -203,6 +213,8 @@ function createNewBlock(check) {
         case 14:
             activeBlock = new Zblock();break;
     }
+    //ghostBlock = new GhostBlock(activeBlock.color, activeBlock.tiles);
+    //console.log(ghostBlock);
     
 }
 function drawBlock(){
@@ -211,9 +223,9 @@ function drawBlock(){
         // cell.innerHTML = "X";
         cell.style.color = activeBlock.color;
         cell.style.backgroundColor = activeBlock.color;
-    });
-    drawGhostBlock();
-    
+        
+       //deployGhost();
+    });    
 }
 function clearBlock(){
     activeBlock.tiles.forEach((element) => {
@@ -223,33 +235,43 @@ function clearBlock(){
         cell.style.backgroundColor = "";
     });
 }
-let ghostBlockCords = [];
-function drawGhostBlock(){
-    let validCordsArray = [];
-    for (let i = 0; i < activeBlock.tiles.length; i++) {
-        staticCords.forEach(element => {
-            if(element.x == activeBlock.tiles[i].x){
-                validCordsArray.push(element.y - 1) ;
+function deployGhost(){
+    while(!ghostPlaced){
+        moveGhost();
+    }
+    hardDropUsed = false;
+}
+function moveGhost() {
+    let validMove = true;
+    ghostBlock.tiles.forEach((element) => {
+        if (element.y == 20) {//tutaj sprawdza czy nie wychodzi poza planszę
+            validMove = false;
+        }
+        staticCords.forEach((cord) => {//ta pętla sprawdza czy blok nie wchodzi na któryś z statycznych już bloków
+            if (cord.y == element.y + 1 && cord.x == element.x) {
+                validMove = false;
             }
-        })
-    }
-    if(validCordsArray.length == 0 ){
-        validCordsArray.push(20);
-    }
-    let validYCord = Math.min.apply(Math, validCordsArray);
-    let higherActiveY = 0;
-    activeBlock.tiles.forEach(element => {
-        
+        });
     });
-    let diff1 = validYCord - activeBlock.tiles[0].y 
-    let diff2 = validYCord - activeBlock.tiles[1].y 
-    let diff3 = validYCord - activeBlock.tiles[2].y 
-    let diff4 = validYCord - activeBlock.tiles[3].y 
-    console.log(diff1, diff2, diff3, diff4)
+    if (validMove) {
+        ghostBlock.tiles.forEach((element) => {//ta pętla wymazuje blok 
+            let cell = document.querySelector(`#row${element.y} #column${element.x}`);
+            cell.style.border = ""
+            element.y = element.y + 1;
+        });
+        drawGhostBlock();
+    } else {
+        // jeśli blok nie może dalej iść w dół to dodaje jego kordy do tablicy staticCords
+        ghostPlaced = true;
+    }
 }
-function clearGhostBlock(){
+function drawGhostBlock(){
+    ghostBlock.tiles.forEach((element) => {//ta pętla wymazuje blok 
+        let cell = document.querySelector(`#row${element.y} #column${element.x}`);
+        cell.style.border = `4px solid ${element.color}`;
+    });
+}
 
-}
 function rotateBlockLeft() {
     clearBlock()
     const rotatedTiles = [];
@@ -333,6 +355,8 @@ function clickEvent(event) {
         case hold2:
             hold();
             break;
+        case instantDown:
+            hardDrop();
     }
 }
 //rusza blok w dół
@@ -360,7 +384,14 @@ function moveBlockDown() {
     } else {
         // jeśli blok nie może dalej iść w dół to dodaje jego kordy do tablicy staticCords
         addToStaticBlocks();
+        hardDropUsed = true;
     }
+}
+function hardDrop(){
+    while(!hardDropUsed){
+        moveBlockDown();
+    }
+    hardDropUsed = false;
 }
 function moveBlockRight() {//wyglądaa praktyznie tak samo jak move down 
     let validMove = true;
