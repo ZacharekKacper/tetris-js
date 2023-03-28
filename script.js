@@ -167,6 +167,14 @@ function stopGame(){
     })
     gameRunning = false
 }
+function checkGameOver(){
+    staticCords.forEach(element => {
+        console.log(element.y);
+        if(element.y >= 1 && element.y <=3){
+            gameRunning = false;
+        }
+    });
+}
 //1 tick to jedno przejscie klocka w dół
 function gameTick() {
     if (gameRunning) {
@@ -322,76 +330,83 @@ function rotateBlockLeft() {
   }
 //sprawdza co jest klinięte i wywołuje odpowiednie funkcje do tego
 function clickEvent(event) {
-    const pressedKey = event.keyCode;
-    const right = 39;
-    const left = 37;
-    const down = 40;
-    const rotateLeft1 = 88;
-    const rotateLeft2 = 38;
-    const rotateRight1 = 90;
-    const rotateRight2 = 17;
-    const instantDown = 32;
-    const hold1 = 67;
-    const hold2 = 16;
-    switch (pressedKey) {
-        case right:
-            moveBlockRight();
-            break;
-        case left:
-            moveBlockLeft();
-            break;
-        case down:
-            moveBlockDown();
-            break;
-        case rotateRight1:
-        case rotateRight2:
-            rotateBlockRight();
-            break;
-        case rotateLeft1:
-        case rotateLeft2:
-            rotateBlockLeft();
-            break;
-        case hold1:
-        case hold2:
-            hold();
-            break;
-        case instantDown:
-            hardDrop();
+    if(gameRunning){
+        const pressedKey = event.keyCode;
+        const right = 39;
+        const left = 37;
+        const down = 40;
+        const rotateLeft1 = 88;
+        const rotateLeft2 = 38;
+        const rotateRight1 = 90;
+        const rotateRight2 = 17;
+        const instantDown = 32;
+        const hold1 = 67;
+        const hold2 = 16;
+    
+        switch (pressedKey) {
+            case right:
+                moveBlockRight();
+                break;
+            case left:
+                moveBlockLeft();
+                break;
+            case down:
+                moveBlockDown();
+                break;
+            case rotateRight1:
+            case rotateRight2:
+                rotateBlockRight();
+                break;
+            case rotateLeft1:
+            case rotateLeft2:
+                rotateBlockLeft();
+                break;
+            case hold1:
+            case hold2:
+                hold();
+                break;
+            case instantDown:
+                hardDrop();
+        }
     }
 }
 //rusza blok w dół
 function moveBlockDown() {
-    let validMove = true;
-    activeBlock.tiles.forEach((element) => {
-        if (element.y == 20) {//tutaj sprawdza czy nie wychodzi poza planszę
-            validMove = false;
-        }
-        staticCords.forEach((cord) => {//ta pętla sprawdza czy blok nie wchodzi na któryś z statycznych już bloków
-            if (cord.y == element.y + 1 && cord.x == element.x) {
+    if(gameRunning){
+        let validMove = true;
+        activeBlock.tiles.forEach((element) => {
+            if (element.y == 20) {//tutaj sprawdza czy nie wychodzi poza planszę
                 validMove = false;
             }
+            staticCords.forEach((cord) => {//ta pętla sprawdza czy blok nie wchodzi na któryś z statycznych już bloków
+                if (cord.y == element.y + 1 && cord.x == element.x) {
+                    validMove = false;
+                }
+            });
         });
-    });
-    if (validMove) {
-        activeBlock.tiles.forEach((element) => {//ta pętla wymazuje blok 
-            let cell = document.querySelector(`#row${element.y} #column${element.x}`);
-            cell.innerHTML = "";
-            cell.style.color = "";
-            cell.style.backgroundColor = "";
-            element.y = element.y + 1;
-        });
-        drawBlock();
-    } else {
-        // jeśli blok nie może dalej iść w dół to dodaje jego kordy do tablicy staticCords
-        addToStaticBlocks();
-        hardDropUsed = true;
+        if (validMove) {
+            activeBlock.tiles.forEach((element) => {//ta pętla wymazuje blok 
+                let cell = document.querySelector(`#row${element.y} #column${element.x}`);
+                cell.innerHTML = "";
+                cell.style.color = "";
+                cell.style.backgroundColor = "";
+                element.y = element.y + 1;
+            });
+            drawBlock();
+        } else {
+            // jeśli blok nie może dalej iść w dół to dodaje jego kordy do tablicy staticCords
+            addToStaticBlocks();
+            hardDropUsed = true;
+        }
     }
 }
 function hardDrop(){
-    while(!hardDropUsed){
-        moveBlockDown();
+    if(gameRunning){
+        while(!hardDropUsed){
+            moveBlockDown();
+        }
+        hardDropUsed = false;
     }
-    hardDropUsed = false;
 }
 function moveBlockRight() {//wyglądaa praktyznie tak samo jak move down 
     let validMove = true;
@@ -445,7 +460,7 @@ function addToStaticBlocks() {//dodaje kordy elementu do tablicy z statycznymi k
     activeBlock.tiles.forEach((element) => {
         staticCords.push(element);
     });
-    console.log(staticCords);
+    checkGameOver()
     createNewBlock(true);
     deleteFullLines();
     alreadyPressedHold = false;
