@@ -122,6 +122,8 @@ class Zblock {
 let activeBlock = "";
 let gameRunning = false;
 let staticCords = [];
+let alreadyPressedHold = false;
+
 window.addEventListener("keydown", clickEvent);
 
 //funkcja do startu gry
@@ -129,7 +131,7 @@ function startGame() {
     if (!gameRunning)
     {
         gameRunning = true;
-        createNewBlock();
+        createNewBlock(true);
         gameTick();
     }
 }
@@ -162,9 +164,18 @@ function gameTick() {
 }
 //tworzy nowy blok z 7 dostępnych
 //todo: trzeba tu dodać by tworzyło ich więcej by w kolejce pokazywało
-function createNewBlock() {
+
+function createNewBlock(check) {
     displayNextPieces()
-    switch (shufflePieces()) {
+    if (check)
+    {
+        shufflePieces(true)
+    }
+    else
+    {
+        shufflePieces(false)
+    }
+    switch (currentPiece) {
         case 1:
         case 2:
             activeBlock = new Iblock();break;
@@ -258,9 +269,13 @@ function clickEvent(event) {
     const right = 39;
     const left = 37;
     const down = 40;
-    const rotateLeft = 65;
-    const rotateRight = 68;
-    const instantDown = 83;
+    const rotateLeft1 = 88;
+    const rotateLeft2 = 38;
+    const rotateRight1 = 90;
+    const rotateRight2 = 17;
+    const instantDown = 32;
+    const hold1 = 67;
+    const hold2 = 16;
     switch (pressedKey) {
         case right:
             moveBlockRight();
@@ -271,11 +286,17 @@ function clickEvent(event) {
         case down:
             moveBlockDown();
             break;
-        case rotateRight:
+        case rotateRight1:
+        case rotateRight2:
             rotateBlockRight();
             break;
-        case rotateLeft:
+        case rotateLeft1:
+        case rotateLeft2:
             rotateBlockLeft();
+            break;
+        case hold1:
+        case hold2:
+            hold();
             break;
     }
 }
@@ -359,8 +380,9 @@ function addToStaticBlocks() {//dodaje kordy elementu do tablicy z statycznymi k
         staticCords.push(element);
     });
     console.log(staticCords);
-    createNewBlock();
+    createNewBlock(true);
     deleteFullLines();
+    alreadyPressedHold = false;
 }
 function deleteFullLines(){
     let linesToCheck = [
@@ -415,9 +437,10 @@ function deleteFullLines(){
 
 }
 let pieces = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+let currentPiece;
 shuffle(pieces);
 
-function shufflePieces()
+function shufflePieces(check)
 {
     if (pieces.length <= 7)
     {
@@ -432,12 +455,17 @@ function shufflePieces()
     }
 
     let p = pieces[0];
-    pieces.shift();
+    // currentPiece = p;
+    if (check)
+    {
+        currentPiece = p;
+        pieces.shift();
+    }
     // console.log(p)
     return p;
 }
 
-let pieceImages = ["Ipiece.png", "Ipiece.png", "Jpiece.png", "Jpiece.png", "Lpiece.png", "Lpiece.png", "Opiece.png", "Opiece.png", "Spiece.png", "Spiece.png", "Tpiece.png", "Tpiece.png", "Zpiece.png", "Zpiece.png"]
+const pieceImages = ["Ipiece.png", "Ipiece.png", "Jpiece.png", "Jpiece.png", "Lpiece.png", "Lpiece.png", "Opiece.png", "Opiece.png", "Spiece.png", "Spiece.png", "Tpiece.png", "Tpiece.png", "Zpiece.png", "Zpiece.png"]
 
 function displayNextPieces()
 {
@@ -447,8 +475,9 @@ function displayNextPieces()
         // next[i].innerHTML = pieces[i+1];
         // console.log(srcs[i].getAttribute('src'))
         // console.log(pieceImages[pieces[i]])
-        srcs[i].src = ("images/" + pieceImages[pieces[i+1] - 1]);
+        srcs[i].src = ("images/Pieces/" + pieceImages[pieces[i+1] - 1]);
     }
+    console.log(pieceImages[pieces[1] - 1] + " " + pieceImages[pieces[2] - 1] + " " + pieceImages[pieces[3] - 1] + " " + pieceImages[pieces[4] - 1] + " " + pieceImages[pieces[5] - 1] + " " + pieceImages[pieces[6] - 1])
 }
 function shuffle(array) {
     let currentIndex = array.length,  randomIndex;
@@ -466,4 +495,46 @@ function shuffle(array) {
     }
   
     return array;
-  }
+}
+
+function hold()
+{
+    let hold = document.querySelector("#holdP");
+    let heldPieceImage = pieceImages[currentPiece-1];
+    let heldPiece;
+    let temp;
+
+    console.log("aaa")
+    if (!alreadyPressedHold)
+    {
+        if (!hold.getAttribute('src'))
+        // if (!heldPieceImage.src)
+        {
+            // console.log(heldPieceImage.getAttribute('src'));
+            // console.log(pieceImages[pieces[0]]);
+            // console.log(currentPiece);
+    
+            hold.src = ("images/Pieces/" + heldPieceImage);
+            // currentPiece = pieces[0];
+            clearBlock()
+            createNewBlock(true)
+            console.log(currentPiece)
+            heldPiece = currentPiece;
+            // currentPiece = pieces[1] - 1;
+            // shufflePieces();
+            // alreadyPressedHold = true;
+        }
+        else
+        {
+            hold.src = ("images/Pieces/" + pieceImages[currentPiece-1]);
+            clearBlock()
+            temp = heldPiece;
+            heldPiece = currentPiece;
+            createNewBlock(false)
+            currentPiece = temp;
+            // currentPiece = heldPiece;
+            console.log(currentPiece)   
+        }
+        alreadyPressedHold = true;
+    }
+}

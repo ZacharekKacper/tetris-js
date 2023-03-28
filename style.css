@@ -150,11 +150,76 @@ button:hover {
 button:active {
     color: #3f3f3f;
 }
-.next-piece, .hold-piece {
+/* .next-piece, .hold-piece {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+#holdP, .nextP {
+    width: 90%;
+}
+#block-help, #block-leaderboard {
+    position: absolute;
+    width: 450px;
+    height: 80%;
+    background-color: rgba(0, 0, 0, .4);
+    top: 10%;
+    color: white;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+#block-help {
+    left: 100px;
+    
+    /* text-align: center; */
+}
+#help {
+    height: 100%;
+    /* display: flex; */
+    flex-direction: column;
+    /* justify-content: center;
+    align-items: center; */
+    /* font-weight: 500; */
+}
+/* #help > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+#block-leaderboard {
+    right: 100px;
+}
+
+.keycaps {
+    height: 60px;
+    margin: 5px 10px;
+}
+.titleDiv {
+    position: absolute;
+    width: 100%;
+    margin: 20px auto;
+    text-align: center;
+}
+.blockTitle {
+    /* margin: 20px; */
+    font-size: 40px;
+    font-weight: 700;
+}
+.help-titles {
+    margin-top: 7px;
+    font-size: 20px;
+    font-weight: 700;
+}
+#lbDiv, .next-piece, #hold-piece,  #help > div, #help{
     display: flex;
     justify-content: center;
     align-items: center;
 }
-img {
+#leaderboard {
+    /* background-color: rgba(0, 0, 255, 0.3); */
     width: 90%;
+    height: 80%;
+    position: absolute;
+    bottom: 40px;
 }
