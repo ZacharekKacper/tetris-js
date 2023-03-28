@@ -122,7 +122,7 @@ class Zblock {
 let activeBlock = "";
 let gameRunning = false;
 let staticCords = [];
-let alreadyPressedHold = false;
+let alreadyPressedHold = true;
 
 window.addEventListener("keydown", clickEvent);
 
@@ -133,6 +133,7 @@ function startGame() {
         gameRunning = true;
         createNewBlock(true);
         gameTick();
+        alreadyPressedHold = false;
     }
 }
 function stopGame(){
@@ -144,6 +145,9 @@ function stopGame(){
     next.forEach( element =>{
         element.src = "";
     })
+
+    document.querySelector("#holdP").src = "";
+    alreadyPressedHold = true;
 
     let toClear = document.querySelectorAll(".column");
     toClear.forEach(element =>{
@@ -166,13 +170,14 @@ function gameTick() {
 //todo: trzeba tu dodać by tworzyło ich więcej by w kolejce pokazywało
 
 function createNewBlock(check) {
-    displayNextPieces()
     if (check)
     {
+        displayNextPieces(true)
         shufflePieces(true)
     }
     else
     {
+        displayNextPieces(false)
         shufflePieces(false)
     }
     switch (currentPiece) {
@@ -484,12 +489,15 @@ function shufflePieces(check)
         pieces = pieces.concat(shuffle(a));
     }
 
-    let p = pieces[0];
     // currentPiece = p;
     if (check)
     {
-        currentPiece = p;
         pieces.shift();
+    }
+    let p = pieces[0];
+    if (check)
+    {
+        currentPiece = p;
     }
     // console.log(p)
     return p;
@@ -497,17 +505,20 @@ function shufflePieces(check)
 
 const pieceImages = ["Ipiece.png", "Ipiece.png", "Jpiece.png", "Jpiece.png", "Lpiece.png", "Lpiece.png", "Opiece.png", "Opiece.png", "Spiece.png", "Spiece.png", "Tpiece.png", "Tpiece.png", "Zpiece.png", "Zpiece.png"]
 
-function displayNextPieces()
+function displayNextPieces(check)
 {
-    let next = document.querySelectorAll(".next-piece");
-    let srcs = document.querySelectorAll(".nextP");
-    for (let i = 0; i < next.length; i++) {
-        // next[i].innerHTML = pieces[i+1];
-        // console.log(srcs[i].getAttribute('src'))
-        // console.log(pieceImages[pieces[i]])
-        srcs[i].src = ("images/Pieces/" + pieceImages[pieces[i+1] - 1]);
+    if (check)
+    {
+        let next = document.querySelectorAll(".next-piece");
+        let srcs = document.querySelectorAll(".nextP");
+        for (let i = 0; i < next.length; i++) {
+            // next[i].innerHTML = pieces[i+1];
+            // console.log(srcs[i].getAttribute('src'))
+            // console.log(pieceImages[pieces[i]])
+            srcs[i].src = ("images/Pieces/" + pieceImages[pieces[i+2] - 1]);
+        }
+        // console.log(pieceImages[pieces[1] - 1] + " " + pieceImages[pieces[2] - 1] + " " + pieceImages[pieces[3] - 1] + " " + pieceImages[pieces[4] - 1] + " " + pieceImages[pieces[5] - 1] + " " + pieceImages[pieces[6] - 1])
     }
-    console.log(pieceImages[pieces[1] - 1] + " " + pieceImages[pieces[2] - 1] + " " + pieceImages[pieces[3] - 1] + " " + pieceImages[pieces[4] - 1] + " " + pieceImages[pieces[5] - 1] + " " + pieceImages[pieces[6] - 1])
 }
 function shuffle(array) {
     let currentIndex = array.length,  randomIndex;
@@ -527,43 +538,31 @@ function shuffle(array) {
     return array;
 }
 
+let heldPiece;
 function hold()
 {
     let hold = document.querySelector("#holdP");
     let heldPieceImage = pieceImages[currentPiece-1];
-    let heldPiece;
     let temp;
 
-    console.log("aaa")
     if (!alreadyPressedHold)
     {
         if (!hold.getAttribute('src'))
-        // if (!heldPieceImage.src)
         {
-            // console.log(heldPieceImage.getAttribute('src'));
-            // console.log(pieceImages[pieces[0]]);
-            // console.log(currentPiece);
-    
             hold.src = ("images/Pieces/" + heldPieceImage);
-            // currentPiece = pieces[0];
             clearBlock()
-            createNewBlock(true)
-            console.log(currentPiece)
             heldPiece = currentPiece;
-            // currentPiece = pieces[1] - 1;
-            // shufflePieces();
-            // alreadyPressedHold = true;
+            createNewBlock(true)
         }
         else
         {
             hold.src = ("images/Pieces/" + pieceImages[currentPiece-1]);
-            clearBlock()
             temp = heldPiece;
             heldPiece = currentPiece;
-            createNewBlock(false)
             currentPiece = temp;
-            // currentPiece = heldPiece;
-            console.log(currentPiece)   
+            clearBlock()
+            createNewBlock(false);
+            console.log(currentPiece);
         }
         alreadyPressedHold = true;
     }
