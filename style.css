@@ -63,10 +63,13 @@ html, body {
     margin: auto;
 }
 .column {
-    background-color: #191919;
+    
     margin: 1px;
     border-radius: 6px;
     content: "";
+}
+.column, #hold-text, #next-text, #score-text, button, #hold-piece, .next-piece {
+    background-color: #0e0e0e;
 }
 #game {
     margin: auto;
@@ -87,7 +90,7 @@ html, body {
 }
 
 #hold-piece, .next-piece{
-    background-color: #191919;
+    /* background-color: #1F1F1F; */
     height: 100px;
     width: 100px;
     color: white;
@@ -99,7 +102,7 @@ html, body {
     font-family: 'Rajdhani', sans-serif;
     font-size: 20px;
     font-weight: 700;
-    background-color: #191919;
+    /* background-color: #1F1F1F; */
 }
 
 #hold-piece, .next-piece, #hold-text, #next-text, #score-text{
@@ -133,7 +136,7 @@ p {
     font-size: 15px;
 }
 button {
-    background-color: #191919;
+    /* background-color: #1F1F1F; */
     color: white;
     font-family: 'Rajdhani', sans-serif;
     font-size: 20px;
