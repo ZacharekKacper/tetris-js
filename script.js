@@ -259,14 +259,15 @@ function clearBlock(){
     });
 }
 function drawGhostBlock(){
-        // --------------------------------------------------------rozwiązanie #1 --------- nie dziala w ogóle ale chyba bedzie latwiej ogarnąc --------------------------------------------------------------
-    // if(ghostBlockCords.length>0){
-    //     ghostBlockCords.forEach(element => {
-    //         let cell = document.querySelector(`#row${element.y} #column${element.x}`);
-    //         cell.style.border = ``;
-    //     });
-    // }
-    // ghostBlockCords = [];
+    //to tutaj ma zostac zakomentowane bo smierc
+    if(ghostBlockCords.length>0){
+        ghostBlockCords.forEach(element => {
+            let cell = document.querySelector(`#row${element.y} #column${element.x}`);
+            cell.style.border = ``;
+        });
+    }
+    ghostBlockCords = [];
+    // --------------------------------------------------------rozwiązanie #1 --------- nie dziala w ogóle ale chyba bedzie latwiej ogarnąc --------------------------------------------------------------
     // activeBlock.tiles.forEach(element => {
     //     ghostBlockCords.push({y:element.y, x:element.x});        
     // });
@@ -296,7 +297,7 @@ function drawGhostBlock(){
     //     cell.style.border = `4px solid ${activeBlock.color}`;
     // });
     // ghostPlaced = false;
-        // --------------------------------------------------------rozwiązanie #2 --------- działa prawie i totalnie nawet nie mam pomysłu co zrobić by działało bardziej --------------------------------------------------------------
+        // --------------------------------------------------------rozwiązanie #2 --------- nie dziala w ogóle ale chyba bedzie latwiej ogarnąc --------------------------------------------------------------
     let activeBlockXCoords = [];
     let validYCoords = [];
     activeBlock.tiles.forEach(tile => {
@@ -310,11 +311,11 @@ function drawGhostBlock(){
     }})
     activeBlockXCoords.forEach(element => {
         for(let i = lowestY; i<20;i++){
-            staticCords.forEach(coord => {  
+            staticCords.forEach(coord => {       
                 if(coord.x == element){
                     validYCoords.push(coord.y-1);
                 }
-            });    
+            }); 
         }
     })
     if(validYCoords.length == 0){
