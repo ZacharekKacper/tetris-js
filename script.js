@@ -140,8 +140,9 @@ window.addEventListener("keydown", clickEvent);
 function startGame() {
     if (!gameRunning)
     {
-        document.querySelector("#startButton").setAttribute("onclick","");
+        document.querySelector("#startGame").setAttribute("onclick","");
         let toClear = document.querySelectorAll(".column");
+        document.querySelector("#score-text").innerHTML = "Score<p id='score'>0</p>";
         staticCords = [];
         activeBlock = ""
         toClear.forEach(element =>{
@@ -151,33 +152,49 @@ function startGame() {
         })
         gameRunning = true;
         window.addEventListener("keydown", clickEvent);
+
+        $("#endScreen").fadeOut(300);
         
         createNewBlock(true);
         gameTick();
         alreadyPressedHold = false;
     }
 }
+function changeVisibility()
+{
+    $("#launch").css("display", "none");
+    $("#end").css("display", "block");
+}
+
 function stopGame(){
-    staticCords = [];
-    activeBlock = "";
-    document.querySelector("#score-text").innerHTML = "Score<p id='score'>0</p>"
-    shuffle(pieces);
-    document.querySelector("#startButton").setAttribute("onclick","startGame()");
-    let next = document.querySelectorAll(".nextP");
-    next.forEach( element =>{
-        element.src = "";
-    })
-
-    document.querySelector("#holdP").src = "";
-    alreadyPressedHold = true;
-
-    let toClear = document.querySelectorAll(".column");
-    toClear.forEach(element =>{
-        element.style.color = "";
-        element.style.backgroundColor = "";
-        element.innerHTML = "";
-    })
-    gameRunning = false
+    if (gameRunning)
+    {
+        staticCords = [];
+        activeBlock = "";
+        document.querySelector("#score-text").innerHTML = "Score<p id='score'>0</p>"
+        shuffle(pieces);
+        document.querySelector("#startGame").setAttribute("onclick","startGame()");
+    
+        document.getElementById('PlayerName').value = '';
+        changeVisibility()
+        $("#endScreen").fadeIn(300);
+        
+                let next = document.querySelectorAll(".nextP");
+        next.forEach( element =>{
+            element.src = "";
+        })
+    
+        document.querySelector("#holdP").src = "";
+        alreadyPressedHold = true;
+    
+        let toClear = document.querySelectorAll(".column");
+        toClear.forEach(element =>{
+            element.style.color = "";
+            element.style.backgroundColor = "";
+            element.innerHTML = "";
+        })
+        gameRunning = false
+    }
 }
 function checkGameOver(){
     staticCords.forEach(element => {
@@ -185,7 +202,11 @@ function checkGameOver(){
         if(element.y >= 1 && element.y <=2){
             gameRunning = false;
             window.removeEventListener("keydown",clickEvent);
-            document.querySelector("#score-text").innerHTML = "geme over";
+            document.querySelector("#score-text").innerHTML = "GAME OVER";
+            document.querySelector("#startGame").setAttribute("onclick","startGame()");
+            document.getElementById('PlayerName').value = '';
+            $("#endScreen").fadeIn(300);
+            changeVisibility()
         }
     });
 }
@@ -590,7 +611,7 @@ shuffle(pieces);
 
 function shufflePieces(check)
 {
-    if (pieces.length <= 7)
+    if (pieces.length <= 8)
     {
         let a =[];
         for (let i = 1; i <= 14; i++) {
