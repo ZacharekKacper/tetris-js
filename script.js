@@ -270,7 +270,7 @@ function drawGhostBlock(){
     // --------------------------------------------------------rozwiązanie #1 --------- nie dziala w ogóle ale chyba bedzie latwiej ogarnąc --------------------------------------------------------------
     // activeBlock.tiles.forEach(element => {
     //     ghostBlockCords.push({y:element.y, x:element.x});        
-    // });
+    // });  
     // let validMove = true;
     // while(!ghostPlaced){
     //     ghostBlockCords.forEach((element) => {
