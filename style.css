@@ -162,6 +162,7 @@ button:active {
     width: 90%;
 }
 #block-help, #block-leaderboard {
+    display: none;
     position: absolute;
     width: 450px;
     height: 80%;

@@ -126,9 +126,9 @@ class GhostBlock {
 }
 //globalne zmienne
 let activeBlock = "";
-let ghostBlock = "";
 let gameRunning = false;
 let staticCords = [];
+let ghostBlockCords = [];
 let alreadyPressedHold = true;
 let hardDropUsed = false;
 let ghostPlaced = false;
@@ -247,8 +247,8 @@ function drawBlock(){
         cell.style.color = activeBlock.color;
         cell.style.backgroundColor = activeBlock.color;
         
-       //deployGhost();
     });    
+    drawGhostBlock();
 }
 function clearBlock(){
     activeBlock.tiles.forEach((element) => {
@@ -258,41 +258,92 @@ function clearBlock(){
         cell.style.backgroundColor = "";
     });
 }
-function deployGhost(){
-    while(!ghostPlaced){
-        moveGhost();
-    }
-    hardDropUsed = false;
-}
-function moveGhost() {
-    let validMove = true;
-    ghostBlock.tiles.forEach((element) => {
-        if (element.y == 20) {//tutaj sprawdza czy nie wychodzi poza planszę
-            validMove = false;
-        }
-        staticCords.forEach((cord) => {//ta pętla sprawdza czy blok nie wchodzi na któryś z statycznych już bloków
-            if (cord.y == element.y + 1 && cord.x == element.x) {
-                validMove = false;
-            }
-        });
-    });
-    if (validMove) {
-        ghostBlock.tiles.forEach((element) => {//ta pętla wymazuje blok 
-            let cell = document.querySelector(`#row${element.y} #column${element.x}`);
-            cell.style.border = ""
-            element.y = element.y + 1;
-        });
-        drawGhostBlock();
-    } else {
-        // jeśli blok nie może dalej iść w dół to dodaje jego kordy do tablicy staticCords
-        ghostPlaced = true;
-    }
-}
 function drawGhostBlock(){
-    ghostBlock.tiles.forEach((element) => {//ta pętla wymazuje blok 
-        let cell = document.querySelector(`#row${element.y} #column${element.x}`);
-        cell.style.border = `4px solid ${element.color}`;
+        // --------------------------------------------------------rozwiązanie #1 --------- nie dziala w ogóle ale chyba bedzie latwiej ogarnąc --------------------------------------------------------------
+    // if(ghostBlockCords.length>0){
+    //     ghostBlockCords.forEach(element => {
+    //         let cell = document.querySelector(`#row${element.y} #column${element.x}`);
+    //         cell.style.border = ``;
+    //     });
+    // }
+    // ghostBlockCords = [];
+    // activeBlock.tiles.forEach(element => {
+    //     ghostBlockCords.push({y:element.y, x:element.x});        
+    // });
+    // let validMove = true;
+    // while(!ghostPlaced){
+    //     ghostBlockCords.forEach((element) => {
+    //         if (element.y >= 20) {//tutaj sprawdza czy nie wychodzi poza planszę
+    //             validMove = false;
+    //         }
+    //         staticCords.forEach((cord) => {//ta pętla sprawdza czy blok nie wchodzi na któryś z statycznych już bloków
+    //             if (cord.y == element.y + 1 && cord.x == element.x) {
+    //                 validMove = false;
+    //             }
+    //         });
+    //         if(validMove){
+    //             ghostBlockCords.forEach(element => {
+    //                 element.y = element.y + 1;
+    //             });
+    //         }
+    //         else{
+    //             ghostPlaced = true;
+    //         }
+    //     });
+    // }
+    // ghostBlockCords.forEach(element => {
+    //     let cell = document.querySelector(`#row${element.y} #column${element.x}`);
+    //     cell.style.border = `4px solid ${activeBlock.color}`;
+    // });
+    // ghostPlaced = false;
+        // --------------------------------------------------------rozwiązanie #2 --------- działa prawie i totalnie nawet nie mam pomysłu co zrobić by działało bardziej --------------------------------------------------------------
+    let activeBlockXCoords = [];
+    let validYCoords = [];
+    activeBlock.tiles.forEach(tile => {
+         activeBlockXCoords.push(tile.x)
+    })
+    activeBlockXCoords = new Set(activeBlockXCoords);
+    let lowestY = activeBlock.tiles[0].y;
+    activeBlock.tiles.forEach(tile => {
+    if (tile.y < lowestY) {
+      lowestY = tile.y;
+    }})
+    activeBlockXCoords.forEach(element => {
+        for(let i = lowestY; i<20;i++){
+            staticCords.forEach(coord => {  
+                if(coord.x == element){
+                    validYCoords.push(coord.y-1);
+                }
+            });    
+        }
+    })
+    if(validYCoords.length == 0){
+        validYCoords.push(20);
+    }
+    let bestYCoord = Math.min.apply(Math, validYCoords) ;
+    let highestY = activeBlock.tiles[0].y;
+    activeBlock.tiles.forEach(tile => {
+    if (tile.y > highestY) {
+      highestY = tile.y;
+    }
+    })
+    let differenceHighest = bestYCoord - highestY;
+    let differenceLowest = bestYCoord - lowestY;
+    let differenceFinal =  0;
+    if(differenceLowest < differenceHighest && bestYCoord < 20){
+        differenceFinal = differenceLowest;
+    }
+    else if(differenceLowest >= differenceHighest){
+        differenceFinal = differenceHighest
+    }
+    activeBlock.tiles.forEach(element => {
+        ghostBlockCords.push({y:element.y + differenceFinal, x:element.x});        
     });
+    ghostBlockCords.forEach(element => {
+        let cell = document.querySelector(`#row${element.y} #column${element.x}`);
+        cell.style.border = `4px solid ${activeBlock.color}`;
+    });
+    
 }
 
 function rotateBlockLeft() {
