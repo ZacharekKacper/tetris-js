@@ -4,8 +4,8 @@ class Iblock {
         this.color = "#1ae1fc";
         this.tiles = [
             { x: 4, y: 1, color:this.color},
-            { x: 5, y: 1, color:this.color},
             { x: 6, y: 1, color:this.color},
+            { x: 5, y: 1, color:this.color},
             { x: 7, y: 1, color:this.color}
         ];
         this.tiles.forEach((element) => {
@@ -71,8 +71,8 @@ class Sblock {
     constructor() {
         this.color = "#0cd10c";
         this.tiles = [
-            { x: 5, y: 1, color:this.color },
             { x: 6, y: 1, color:this.color },
+            { x: 5, y: 1, color:this.color },
             { x: 4, y: 2, color:this.color },
             { x: 5, y: 2, color:this.color }
         ];
@@ -140,7 +140,18 @@ window.addEventListener("keydown", clickEvent);
 function startGame() {
     if (!gameRunning)
     {
+        document.querySelector("#startButton").setAttribute("onclick","");
+        let toClear = document.querySelectorAll(".column");
+        staticCords = [];
+        activeBlock = ""
+        toClear.forEach(element =>{
+        element.style.color = "";
+        element.style.backgroundColor = "";
+        element.innerHTML = "";
+        })
         gameRunning = true;
+        window.addEventListener("keydown", clickEvent);
+        
         createNewBlock(true);
         gameTick();
         alreadyPressedHold = false;
@@ -149,8 +160,9 @@ function startGame() {
 function stopGame(){
     staticCords = [];
     activeBlock = "";
+    document.querySelector("#score-text").innerHTML = "Score<p id='score'>0</p>"
     shuffle(pieces);
-    
+    document.querySelector("#startButton").setAttribute("onclick","startGame()");
     let next = document.querySelectorAll(".nextP");
     next.forEach( element =>{
         element.src = "";
@@ -170,8 +182,10 @@ function stopGame(){
 function checkGameOver(){
     staticCords.forEach(element => {
         console.log(element.y);
-        if(element.y >= 1 && element.y <=3){
+        if(element.y >= 1 && element.y <=2){
             gameRunning = false;
+            window.removeEventListener("keydown",clickEvent);
+            document.querySelector("#score-text").innerHTML = "geme over";
         }
     });
 }
@@ -188,42 +202,43 @@ function gameTick() {
 //todo: trzeba tu dodać by tworzyło ich więcej by w kolejce pokazywało
 
 function createNewBlock(check) {
-    if (check)
-    {
-        displayNextPieces(true)
-        shufflePieces(true)
+    if(gameRunning){
+        if (check)
+        {
+            displayNextPieces(true)
+            shufflePieces(true)
+        }
+        else
+        {
+            displayNextPieces(false)
+            shufflePieces(false)
+        }
+        switch (currentPiece) {
+            case 1:
+            case 2:
+                activeBlock = new Iblock();break;
+            case 3:
+            case 4:
+                activeBlock = new Jblock();break;
+            case 5:
+            case 6:
+                activeBlock = new Lblock();break;
+            case 7:
+            case 8:
+                activeBlock = new Oblock();break;
+            case 9:
+            case 10:
+                activeBlock = new Sblock();break;
+            case 11:
+            case 12:
+                activeBlock = new Tblock();break;
+            case 13:
+            case 14:
+                activeBlock = new Zblock();break;
+        }
+        //ghostBlock = new GhostBlock(activeBlock.color, activeBlock.tiles);
+        //console.log(ghostBlock);
     }
-    else
-    {
-        displayNextPieces(false)
-        shufflePieces(false)
-    }
-    switch (currentPiece) {
-        case 1:
-        case 2:
-            activeBlock = new Iblock();break;
-        case 3:
-        case 4:
-            activeBlock = new Jblock();break;
-        case 5:
-        case 6:
-            activeBlock = new Lblock();break;
-        case 7:
-        case 8:
-            activeBlock = new Oblock();break;
-        case 9:
-        case 10:
-            activeBlock = new Sblock();break;
-        case 11:
-        case 12:
-            activeBlock = new Tblock();break;
-        case 13:
-        case 14:
-            activeBlock = new Zblock();break;
-    }
-    //ghostBlock = new GhostBlock(activeBlock.color, activeBlock.tiles);
-    //console.log(ghostBlock);
-    
 }
 function drawBlock(){
     activeBlock.tiles.forEach((element) => {
