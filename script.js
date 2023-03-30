@@ -140,6 +140,7 @@ window.addEventListener("keydown", clickEvent);
 function startGame() {
     if (!gameRunning)
     {
+        shuffle(pieces);
         document.querySelector("#startGame").setAttribute("onclick","");
         let toClear = document.querySelectorAll(".column");
         document.querySelector("#score-text").innerHTML = "Score<p id='score'>0</p>";
@@ -158,6 +159,11 @@ function startGame() {
         createNewBlock(true);
         gameTick();
         alreadyPressedHold = false;
+        document.querySelector("#holdP").src = "";
+
+        toClear.forEach(element =>{
+            element.style.border = ``;
+        })
     }
 }
 function changeVisibility()
@@ -171,15 +177,16 @@ function stopGame(){
     {
         staticCords = [];
         activeBlock = "";
-        document.querySelector("#score-text").innerHTML = "Score<p id='score'>0</p>"
-        shuffle(pieces);
+        // document.querySelector("#score-text").innerHTML = "Score<p id='score'>0</p>";
+        document.querySelector("#score-text").innerHTML = "GAME OVER";
+        
         document.querySelector("#startGame").setAttribute("onclick","startGame()");
     
         document.getElementById('PlayerName').value = '';
-        changeVisibility()
+        changeVisibility();
         $("#endScreen").fadeIn(300);
         
-                let next = document.querySelectorAll(".nextP");
+        let next = document.querySelectorAll(".nextP");
         next.forEach( element =>{
             element.src = "";
         })
@@ -192,6 +199,7 @@ function stopGame(){
             element.style.color = "";
             element.style.backgroundColor = "";
             element.innerHTML = "";
+            element.style.border = ``;
         })
         gameRunning = false
     }
@@ -207,6 +215,7 @@ function checkGameOver(){
             document.getElementById('PlayerName').value = '';
             $("#endScreen").fadeIn(300);
             changeVisibility()
+            // stopGame()
         }
     });
 }
@@ -291,7 +300,7 @@ function drawGhostBlock(){
     // --------------------------------------------------------rozwiązanie #1 --------- nie dziala w ogóle ale chyba bedzie latwiej ogarnąc --------------------------------------------------------------
     // activeBlock.tiles.forEach(element => {
     //     ghostBlockCords.push({y:element.y, x:element.x});        
-    // });  
+    // });
     // let validMove = true;
     // while(!ghostPlaced){
     //     ghostBlockCords.forEach((element) => {
