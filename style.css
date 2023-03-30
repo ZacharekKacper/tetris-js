@@ -39,7 +39,7 @@ html, body {
     overflow: hidden;
 }
 body {
-    background-image: url(images/background2.svg);
+    background-image: url(images/background.svg);
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
