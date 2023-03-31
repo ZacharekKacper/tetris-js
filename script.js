@@ -156,7 +156,10 @@ function startGame() {
         $("#endScreen").fadeOut(300);
         
         createNewBlock(true);
+        tickTime = 1000;
         gameTick();
+        seconds = 0;
+        minutes = 0;
         timer();
         alreadyPressedHold = false;
         document.querySelector("#holdP").src = "";
