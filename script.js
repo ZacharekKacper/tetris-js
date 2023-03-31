@@ -549,28 +549,28 @@ function deleteFullLines(){
             linesToDelete.push(line);
         }
     });
-    switch(numberOfDeletedLines.length){
+    console.log(linesToDelete);
+    switch(linesToDelete.length){
         case 1:
-            score += 100 * level;
+            score += 40 * level;
             break;
         case 2:
-            score += 200 * level;
+            score += 100 * level;
             break;
         case 3:
-            score += 500 * level;
+            score += 300 * level;
             break;
         case 4:
-            score += 800 * level;
+            score += 1200 * level;
             break;
     }
+    document.querySelector("#score").innerHTML = score;
     numberOfDeletedLines += linesToDelete.length;
-    console.log(numberOfDeletedLines);
     if(numberOfDeletedLines % 10 == 0 && linesToDelete.length != 0 && level < 30){
         tickTime *= 0.95;
         level += 1;
         document.querySelector("#level").innerHTML = level;
     }
-    console.log(tickTime);
     linesToDelete.forEach(line => {
         staticCords.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
