@@ -130,12 +130,15 @@ let level = 1;
 let numberOfDeletedLines = 0;
 let score = 0;
 let tickTime = 1000;
+let seconds = 0;
+let minutes = 0;
 window.addEventListener("keydown", clickEvent);
 
 //funkcja do startu gry
 function startGame() {
     if (!gameRunning)
     {
+        
         shuffle(pieces);
         document.querySelector("#startGame").setAttribute("onclick","");
         let toClear = document.querySelectorAll(".column");
@@ -154,6 +157,7 @@ function startGame() {
         
         createNewBlock(true);
         gameTick();
+        timer();
         alreadyPressedHold = false;
         document.querySelector("#holdP").src = "";
 
@@ -221,6 +225,24 @@ function gameTick() {
             moveBlockDown();
             gameTick();
         }, tickTime);
+    }
+}
+function timer(){
+    if(gameRunning){
+        setTimeout(() =>{
+            seconds += 1;
+            if(seconds == 60){
+                minutes += 1
+                seconds = 0;
+            }
+            if(seconds < 10){
+            document.querySelector("#time").innerHTML = `${minutes}:0${seconds}`;
+            }
+            else{
+                document.querySelector("#time").innerHTML = `${minutes}:${seconds}`;
+            }
+            timer();
+        },1000)
     }
 }
 //tworzy nowy blok z 7 dostępnych
