@@ -118,12 +118,6 @@ class Zblock {
         });
     }
 }
-class GhostBlock {
-    constructor(color , tiles) {
-        this.color = color
-        this.tiles = tiles
-    }
-}
 //globalne zmienne
 let activeBlock = "";
 let gameRunning = false;
@@ -132,8 +126,10 @@ let ghostBlockCords = [];
 let alreadyPressedHold = true;
 let hardDropUsed = false;
 let ghostPlaced = false;
-
-
+let level = 1;
+let numberOfDeletedLines = 0;
+let score = 0;
+let tickTime = 1000;
 window.addEventListener("keydown", clickEvent);
 
 //funkcja do startu gry
@@ -221,11 +217,12 @@ function checkGameOver(){
 }
 //1 tick to jedno przejscie klocka w dół
 function gameTick() {
+    console.log(tickTime);
     if (gameRunning) {
         setTimeout(() => {
             moveBlockDown();
             gameTick();
-        }, 1000);
+        }, tickTime);
     }
 }
 //tworzy nowy blok z 7 dostępnych
@@ -266,8 +263,7 @@ function createNewBlock(check) {
             case 14:
                 activeBlock = new Zblock();break;
         }
-        //ghostBlock = new GhostBlock(activeBlock.color, activeBlock.tiles);
-        //console.log(ghostBlock);
+        drawGhostBlock();
     }
 }
 function drawBlock(){
@@ -327,55 +323,7 @@ function drawGhostBlock(){
         let cell = document.querySelector(`#row${element.y} #column${element.x}`);
         cell.style.border = `4px solid ${activeBlock.color}`;
     });
-    ghostPlaced = false;
-        // --------------------------------------------------------rozwiązanie #2 --------- dziala umm jakos a ja nie mam pomyslu jak to ogarnać --------------------------------------------------------------
-    // let activeBlockXCoords = [];
-    // let validYCoords = [];
-    // activeBlock.tiles.forEach(tile => {
-    //      activeBlockXCoords.push(tile.x)
-    // })
-    // activeBlockXCoords = new Set(activeBlockXCoords);
-    // let lowestY = activeBlock.tiles[0].y;
-    // activeBlock.tiles.forEach(tile => {
-    // if (tile.y < lowestY) {
-    //   lowestY = tile.y;
-    // }})
-    // activeBlockXCoords.forEach(element => {
-    //     for(let i = lowestY; i<20;i++){
-    //         staticCords.forEach(coord => {       
-    //             if(coord.x == element){
-    //                 validYCoords.push(coord.y-1);
-    //             }
-    //         }); 
-    //     }
-    // })
-    // if(validYCoords.length == 0){
-    //     validYCoords.push(20);
-    // }
-    // let bestYCoord = Math.min.apply(Math, validYCoords) ;
-    // let highestY = activeBlock.tiles[0].y;
-    // activeBlock.tiles.forEach(tile => {
-    // if (tile.y > highestY) {
-    //   highestY = tile.y;
-    // }
-    // })
-    // let differenceHighest = bestYCoord - highestY;
-    // let differenceLowest = bestYCoord - lowestY;
-    // let differenceFinal =  0;
-    // if(differenceLowest < differenceHighest && bestYCoord < 20){
-    //     differenceFinal = differenceLowest;
-    // }
-    // else if(differenceLowest >= differenceHighest){
-    //     differenceFinal = differenceHighest
-    // }
-    // activeBlock.tiles.forEach(element => {
-    //     ghostBlockCords.push({y:element.y + differenceFinal, x:element.x});        
-    // });
-    // ghostBlockCords.forEach(element => {
-    //     let cell = document.querySelector(`#row${element.y} #column${element.x}`);
-    //     cell.style.border = `4px solid ${activeBlock.color}`;
-    // });
-    
+    ghostPlaced = false;    
 }
 
 function rotateBlockLeft() {
@@ -563,6 +511,7 @@ function addToStaticBlocks() {//dodaje kordy elementu do tablicy z statycznymi k
     deleteFullLines();
     alreadyPressedHold = false;
 }
+
 function deleteFullLines(){
     let linesToCheck = [3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
     linesToDelete = []
@@ -577,6 +526,24 @@ function deleteFullLines(){
             linesToDelete.push(line);
         }
     });
+    switch(numberOfDeletedLines.length){
+        case 1:
+            score += 100 * level;
+            break;
+        case 2:
+            score += 200 * level;
+            break;
+        case 3:
+            score += 500 * level;
+            break;
+        case 4:
+            score += 800 * level;
+            break;
+    }
+    numberOfDeletedLines += linesToDelete.length;
+    if(numberOfDeletedLines % 10 == 0){
+        tickTime *= 0.95;
+    }
     linesToDelete.forEach(line => {
         staticCords.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
@@ -612,7 +579,6 @@ function deleteFullLines(){
 let pieces = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 let currentPiece;
 shuffle(pieces);
-
 function shufflePieces(check)
 {
     if (pieces.length <= 8)
