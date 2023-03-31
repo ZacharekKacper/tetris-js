@@ -202,7 +202,6 @@ function stopGame(){
 }
 function checkGameOver(){
     staticCords.forEach(element => {
-        console.log(element.y);
         if(element.y >= 1 && element.y <=2){
             gameRunning = false;
             window.removeEventListener("keydown",clickEvent);
@@ -217,7 +216,6 @@ function checkGameOver(){
 }
 //1 tick to jedno przejscie klocka w dół
 function gameTick() {
-    console.log(tickTime);
     if (gameRunning) {
         setTimeout(() => {
             moveBlockDown();
@@ -541,8 +539,11 @@ function deleteFullLines(){
             break;
     }
     numberOfDeletedLines += linesToDelete.length;
-    if(numberOfDeletedLines % 10 == 0){
+    console.log(numberOfDeletedLines);
+    if(numberOfDeletedLines % 10 == 0 && level < 30){
         tickTime *= 0.95;
+        level += 1;
+        document.querySelector("#level").innerHTML = level;
     }
     linesToDelete.forEach(line => {
         staticCords.forEach((element) => {
@@ -553,7 +554,6 @@ function deleteFullLines(){
         });
         // usuwa linie z static cordow
         for (let i = staticCords.length - 1; i >= 0; i--) {
-            console.log(staticCords[i].y, line);
             if (staticCords[i].y === line) {
                 staticCords.splice(i, 1);
             }
@@ -567,7 +567,6 @@ function deleteFullLines(){
 
 
            staticCords.forEach((element) => {
-             console.log(element);
              let cell = document.querySelector(`#row${element.y} #column${element.x}`);
             //  cell.innerHTML = "X";
              cell.style.color = element.color;
@@ -666,7 +665,6 @@ function hold()
             currentPiece = temp;
             clearBlock()
             createNewBlock(false);
-            console.log(currentPiece);
         }
         alreadyPressedHold = true;
     }
