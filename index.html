@@ -18,9 +18,25 @@
             <div id="hold-piece"><img id="holdP" src=""></div>
         </div>
         <div id="board">
-            <div id="time-text">Time <p id="time">0:00</p></div>
+            <!-- <div id="time-text">Time <p id="time">0:00</p></div>
             <div id="score-text">Score<p id="score" class="scorePoints">0</p></div>
-            <div id="level-text">Level<p id="level">1</p></div>
+            <div id="level-text">Level<p id="level">1</p></div> -->
+
+            <div id="roundInfo">
+                <!-- Score<p id="score" class="scorePoints">0</p> -->
+                <div id="levelDiv">
+                    <span id="level-text">Level</span>
+                    <p id="level" class="scorePoints">0</p>
+                </div>
+                <div id="scoreDiv">
+                    <span id="score-text">Score</span>
+                    <p id="score" class="scorePoints">0</p>
+                </div>
+                <div id="timeDiv">
+                    <span id="time-text">Time</span>
+                    <p id="time" class="scorePoints">0:00</p>
+                </div>
+            </div>
             <div class="row" id="row1">
                 <div class="column" id="column1"></div>
                 <div class="column" id="column2"></div>
@@ -281,8 +297,20 @@
                     <span class="blockTitle">GAME OVER</span>
                 </div>
                 <div id="saveScore">
-                    <span id="finalScoreText">Score</span>
-                    <span id="finalScoreNumber" class="scorePoints">0</span>
+                    <div id="gameResults">
+                        <div id="finalLevel" class="finalDivs">
+                            <span id="finalLevelText" class="finalTexts">Level</span>
+                            <span id="finalLevelNumber" class="scorePoints"></span>
+                        </div>
+                        <div id="finalScore" class="finalDivs">
+                            <span id="finalScoreText" class="finalTexts">Score</span>
+                            <span id="finalScoreNumber" class="scorePoints"></span>
+                        </div>
+                        <div id="finalTime" class="finalDivs">
+                            <span id="finalTimeText" class="finalTexts">Time</span>
+                            <span id="finalTimeNumber" class="scorePoints"></span>
+                        </div>
+                    </div>
                     <input type="text" id="PlayerName" maxlength="20" placeholder="Enter your name..." required>
                 </div>
                 <div id="startDiv">

@@ -4,8 +4,8 @@ class Iblock {
         this.color = "#1ae1fc";
         this.tiles = [
             { x: 4, y: 1, color:this.color},
-            { x: 5, y: 1, color:this.color},
             { x: 6, y: 1, color:this.color},
+            { x: 5, y: 1, color:this.color},
             { x: 7, y: 1, color:this.color}
         ];
         this.tiles.forEach((element) => {
@@ -72,9 +72,9 @@ class Sblock {
         this.color = "#0cd10c";
         this.tiles = [
             { x: 6, y: 1, color:this.color },
-            { x: 5, y: 2, color:this.color },
             { x: 5, y: 1, color:this.color },
-            { x: 4, y: 2, color:this.color }
+            { x: 4, y: 2, color:this.color },
+            { x: 5, y: 2, color:this.color }
         ];
         this.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
@@ -106,8 +106,8 @@ class Zblock {
         this.color = "#eb0f0f";
         this.tiles = [
             { x: 4, y: 1 ,color:this.color},
-            { x: 5, y: 2 ,color:this.color},
             { x: 5, y: 1 ,color:this.color},
+            { x: 5, y: 2 ,color:this.color},
             { x: 6, y: 2 ,color:this.color}
         ];
         this.tiles.forEach((element) => {
@@ -126,7 +126,7 @@ let ghostBlockCords = [];
 let alreadyPressedHold = true;
 let hardDropUsed = false;
 let ghostPlaced = false;
-let level = 1;
+let level = 0;
 let numberOfDeletedLines = 0;
 let score = 0;
 let tickTime = 1000;
@@ -142,7 +142,9 @@ function startGame() {
         shuffle(pieces);
         document.querySelector("#startGame").setAttribute("onclick","");
         let toClear = document.querySelectorAll(".column");
-        document.querySelector("#score-text").innerHTML = "Score<p id='score'>0</p>";
+        document.querySelector("#scoreDiv").innerHTML = "<span id='score-text'>Score</span><p id='score' class='scorePoints'>0</p>";
+        $("#levelDiv").css("opacity", "1");
+        $("#timeDiv").css("opacity", "1");
         staticCords = [];
         activeBlock = ""
         toClear.forEach(element =>{
@@ -154,8 +156,7 @@ function startGame() {
         window.addEventListener("keydown", clickEvent);
 
         $("#endScreen").fadeOut(300);
-        score = 0;
-        document.querySelector("#finalScoreNumber").innerHTML = score;
+        document.querySelector("#time").innerHTML = "0:00";
         createNewBlock(true);
         tickTime = 1000;
         gameTick();
@@ -168,6 +169,10 @@ function startGame() {
         toClear.forEach(element =>{
             element.style.border = ``;
         })
+
+        level = 0;
+        numberOfDeletedLines = 0;
+        score = 0;
     }
 }
 function changeVisibility()
@@ -182,13 +187,16 @@ function stopGame(){
         staticCords = [];
         activeBlock = "";
         // document.querySelector("#score-text").innerHTML = "Score<p id='score'>0</p>";
-        document.querySelector("#score-text").innerHTML = "GAME OVER";
-        
-        
+        document.querySelector("#scoreDiv").innerHTML = "<span id='score-text'>GAME OVER</span>";
+        $("#levelDiv").css("opacity", "0");
+        $("#timeDiv").css("opacity", "0");
         
         document.querySelector("#startGame").setAttribute("onclick","startGame()");
     
         document.getElementById('PlayerName').value = '';
+        document.querySelector("#finalScoreNumber").innerHTML = score.toLocaleString("en-US");
+        document.querySelector("#finalTimeNumber").innerHTML = document.querySelector("#time").innerHTML;
+        document.querySelector("#finalLevelNumber").innerHTML = level;
         changeVisibility();
         $("#endScreen").fadeIn(300);
         
@@ -215,12 +223,16 @@ function checkGameOver(){
         if(element.y >= 1 && element.y <=2){
             gameRunning = false;
             window.removeEventListener("keydown",clickEvent);
-            document.querySelector("#score-text").innerHTML = "GAME OVER";
+            document.querySelector("#scoreDiv").innerHTML = "<span id='score-text'>GAME OVER</span>";
+            $("#levelDiv").css("opacity", "0");
+            $("#timeDiv").css("opacity", "0");
             document.querySelector("#startGame").setAttribute("onclick","startGame()");
             document.getElementById('PlayerName').value = '';
+            document.querySelector("#finalScoreNumber").innerHTML = score.toLocaleString("en-US");
+            document.querySelector("#finalTimeNumber").innerHTML = document.querySelector("#time").innerHTML;
+            document.querySelector("#finalLevelNumber").innerHTML = level;
             $("#endScreen").fadeIn(300);
-            changeVisibility()
-            // stopGame()
+            changeVisibility();
         }
     });
 }
@@ -242,7 +254,7 @@ function timer(){
                 seconds = 0;
             }
             if(seconds < 10){
-            document.querySelector("#time").innerHTML = `${minutes}:0${seconds}`;
+                document.querySelector("#time").innerHTML = `${minutes}:0${seconds}`;
             }
             else{
                 document.querySelector("#time").innerHTML = `${minutes}:${seconds}`;
@@ -353,7 +365,7 @@ function drawGhostBlock(){
 }
 
 function rotateBlockLeft() {
-    clearBlock()
+    clearBlock();
     const rotatedTiles = [];
     const center = activeBlock.tiles[1];
     activeBlock.tiles.forEach((tile) => {
@@ -363,21 +375,21 @@ function rotateBlockLeft() {
       const y = (tile.x - center.x) + center.y;
       // Check if tile is within bounds
       if (x < 1 || x > 10 || y < 1 || y > 20) {
-        drawBlock()
+        drawBlock();
         throw new Error("Block cannot be rotated outside of the board.");
       }
       // Check if tile overlaps with static coordinates
       if (staticCords.some((cord) => cord.x === x && cord.y === y)) {
-        drawBlock()
+        drawBlock();
         throw new Error("Block cannot be rotated into static coordinates.");
       }
       rotatedTiles.push({ x, y, color});
     });
     activeBlock.tiles = rotatedTiles;
-    drawBlock()
+    drawBlock();
   }
   function rotateBlockRight() {
-    clearBlock()
+    clearBlock();
     const rotatedTiles = [];
     const center = activeBlock.tiles[1];
     activeBlock.tiles.forEach((tile) => {
@@ -398,7 +410,7 @@ function rotateBlockLeft() {
       rotatedTiles.push({ x, y , color});
     });
     activeBlock.tiles = rotatedTiles;
-    drawBlock()
+    drawBlock();
   }
 //sprawdza co jest klinięte i wywołuje odpowiednie funkcje do tego
 function clickEvent(event) {
@@ -538,6 +550,7 @@ function addToStaticBlocks() {//dodaje kordy elementu do tablicy z statycznymi k
     alreadyPressedHold = false;
 }
 
+let oldLevel = 0;
 function deleteFullLines(){
     let linesToCheck = [3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
     linesToDelete = []
@@ -552,28 +565,37 @@ function deleteFullLines(){
             linesToDelete.push(line);
         }
     });
+    console.log(linesToDelete);
     switch(linesToDelete.length){
         case 1:
-            score += 40 * level;
+            score += 40 * (level + 1);
             break;
         case 2:
-            score += 100 * level;
+            score += 100 * (level + 1);
             break;
         case 3:
-            score += 300 * level;
+            score += 300 * (level + 1);
             break;
         case 4:
-            score += 1200 * level;
+            score += 1200 * (level + 1);
             break;
     }
-    document.querySelector("#score").innerHTML = score;
-    document.querySelector("#finalScoreNumber").innerHTML = score;
+    document.querySelector("#score").innerHTML = score.toLocaleString("en-US");
     numberOfDeletedLines += linesToDelete.length;
-    if(numberOfDeletedLines % 10 == 0 && linesToDelete.length != 0 && level < 30){
-        tickTime *= 0.95;
-        level += 1;
+    if(linesToDelete.length != 0 && level < 30){
+        level = Math.floor(numberOfDeletedLines / 10);
+        if (level != oldLevel && level != 0)
+        {
+            tickTime *= 0.85;
+            oldLevel = level;
+        }
         document.querySelector("#level").innerHTML = level;
+        // console.log(`OldLevel: ${oldLevel}`);
     }
+    // console.log(`tickTime: ${tickTime}`);
+    // console.log(`level: ${level}`);
+    // console.log(`numberOfDeletedLines: ${numberOfDeletedLines}`);
+    
     linesToDelete.forEach(line => {
         staticCords.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);

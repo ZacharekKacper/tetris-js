@@ -81,7 +81,7 @@ body::before {
     border-radius: 6px;
     content: "";
 }
-.column, #hold-text, #next-text, #score-text, button, #hold-piece, .next-piece, #PlayerName {
+.column, #hold-text, #next-text, #roundInfo, button, #hold-piece, .next-piece, #PlayerName {
     background-color: #0e0e0e;
 }
 #game {
@@ -98,9 +98,11 @@ body::before {
 
 #hold-text, #next-text{
     width: 100px;
+    height: 50px;
 }
-#score-text {
+#roundInfo {
     width: 398px;
+    height: 50px;
     margin-right: 1px;
 }
 
@@ -110,15 +112,15 @@ body::before {
     width: 100px;
     color: white;
 }
-#hold-text, #next-text, #score-text {
-    height: 50px;
+#hold-text, #next-text, #score-text, #level-text, #time-text {
+    /* height: 50px; */
     text-align: center;
     font-size: 20px;
     font-weight: 700;
     /* background-color: #1F1F1F; */
 }
 
-#hold-piece, .next-piece, #hold-text, #next-text, #score-text{
+#hold-piece, .next-piece, #hold-text, #next-text, #roundInfo{
     /* border: 1px solid transparent; */
     box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -128,12 +130,13 @@ body::before {
     padding: 2px;
 }
 
-#hold-text, #next-text {
+/* #hold-text, #next-text {
     padding: 12px;
-}
-#score-text {
+} */
+#roundInfo {
     margin-bottom: 1px;
     margin-left: 1px;
+    /* flex-direction: column; */
 }
 #hold, #board{
     margin-right: 1px;
@@ -226,7 +229,7 @@ button:active {
     font-size: 20px;
     font-weight: 700;
 }
-#lbDiv, .next-piece, #hold-piece,  #help > div, #help, #saveScore, #startDiv {
+#lbDiv, .next-piece, #hold-piece,  #help > div, #help, #saveScore, #startDiv, #hold-text, #next-text, .finalDivs {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -262,7 +265,7 @@ button:active {
 /* #finalScoreNumber, #finalScoreText, #playerName {
     margin: 10px;
 } */
-#finalScoreNumber {
+#finalScoreNumber, #finalLevelNumber, #finalTimeNumber {
     font-size: 32px;
     margin-top: 0px;
     font-weight: 700;
@@ -303,7 +306,7 @@ button:active {
 #startGame:active {
     color: #3f3f3f;
 }
-#finalScoreText, .authors {
+.finalTexts, .authors {
     font-size: 20px;
 }
 /* #end, #launch {
@@ -314,4 +317,19 @@ button:active {
 }
 #end {
     display: none;
+}
+#gameResults {
+    width: 100%;
+    text-align: center;
+}
+.finalDivs {
+    flex-direction: column;
+}
+
+#roundInfo, #gameResults{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    align-items: center;
+
+    /* justify-content: center; */
 }
