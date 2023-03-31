@@ -565,11 +565,12 @@ function deleteFullLines(){
     }
     numberOfDeletedLines += linesToDelete.length;
     console.log(numberOfDeletedLines);
-    if(numberOfDeletedLines % 10 == 0 && level < 30){
+    if(numberOfDeletedLines % 10 == 0 && linesToDelete.length != 0 && level < 30){
         tickTime *= 0.95;
         level += 1;
         document.querySelector("#level").innerHTML = level;
     }
+    console.log(tickTime);
     linesToDelete.forEach(line => {
         staticCords.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
