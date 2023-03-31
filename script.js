@@ -4,8 +4,8 @@ class Iblock {
         this.color = "#1ae1fc";
         this.tiles = [
             { x: 4, y: 1, color:this.color},
-            { x: 6, y: 1, color:this.color},
             { x: 5, y: 1, color:this.color},
+            { x: 6, y: 1, color:this.color},
             { x: 7, y: 1, color:this.color}
         ];
         this.tiles.forEach((element) => {
@@ -72,9 +72,9 @@ class Sblock {
         this.color = "#0cd10c";
         this.tiles = [
             { x: 6, y: 1, color:this.color },
+            { x: 5, y: 2, color:this.color },
             { x: 5, y: 1, color:this.color },
-            { x: 4, y: 2, color:this.color },
-            { x: 5, y: 2, color:this.color }
+            { x: 4, y: 2, color:this.color }
         ];
         this.tiles.forEach((element) => {
             let cell = document.querySelector(`#row${element.y} #column${element.x}`);
@@ -106,8 +106,8 @@ class Zblock {
         this.color = "#eb0f0f";
         this.tiles = [
             { x: 4, y: 1 ,color:this.color},
-            { x: 5, y: 1 ,color:this.color},
             { x: 5, y: 2 ,color:this.color},
+            { x: 5, y: 1 ,color:this.color},
             { x: 6, y: 2 ,color:this.color}
         ];
         this.tiles.forEach((element) => {
@@ -154,7 +154,8 @@ function startGame() {
         window.addEventListener("keydown", clickEvent);
 
         $("#endScreen").fadeOut(300);
-        
+        score = 0;
+        document.querySelector("#finalScoreNumber").innerHTML = score;
         createNewBlock(true);
         tickTime = 1000;
         gameTick();
@@ -182,6 +183,8 @@ function stopGame(){
         activeBlock = "";
         // document.querySelector("#score-text").innerHTML = "Score<p id='score'>0</p>";
         document.querySelector("#score-text").innerHTML = "GAME OVER";
+        
+        
         
         document.querySelector("#startGame").setAttribute("onclick","startGame()");
     
@@ -549,7 +552,6 @@ function deleteFullLines(){
             linesToDelete.push(line);
         }
     });
-    console.log(linesToDelete);
     switch(linesToDelete.length){
         case 1:
             score += 40 * level;
@@ -565,6 +567,7 @@ function deleteFullLines(){
             break;
     }
     document.querySelector("#score").innerHTML = score;
+    document.querySelector("#finalScoreNumber").innerHTML = score;
     numberOfDeletedLines += linesToDelete.length;
     if(numberOfDeletedLines % 10 == 0 && linesToDelete.length != 0 && level < 30){
         tickTime *= 0.95;
