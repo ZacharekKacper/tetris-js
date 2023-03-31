@@ -563,13 +563,7 @@ function addToStaticBlocks() {//dodaje kordy elementu do tablicy z statycznymi k
     alreadyPressedHold = false;
 }
 function deleteFullLines(){
-    let linesToCheck = [
-        staticCords[staticCords.length - 1].y,
-        staticCords[staticCords.length - 2].y,
-        staticCords[staticCords.length - 3].y,
-        staticCords[staticCords.length - 4].y
-    ]
-    linesToCheck = new Set(linesToCheck);
+    let linesToCheck = [3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
     linesToDelete = []
     linesToCheck.forEach(line => {
         let count = 0;
