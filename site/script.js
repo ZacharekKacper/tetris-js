@@ -452,49 +452,49 @@ function deleteFullLines(){
         case 1:
             score += 40 * (level + 1);
 
-            $("#whyThisScore").append("<span>Single: + " + 40 * (level + 1) + "</span>")
+            $("#whyThisScore").append("<span>Single: + " + (40 * (level + 1)).toLocaleString("en-US") + "</span>")
             .fadeIn(300).animate({fontSize: "20px" }, 500)
-            .animate({ "top": "-=30px" }, {
+            .animate({ "top": "-30px" }, {
                 queue: false,
                 duration: 500
             })
-            .fadeOut(500, function() {$("#whyThisScore").animate({ "top": "+=30px" }, 1).empty();});
+            .fadeOut(500, function() {$("#whyThisScore").animate({ "top": "+30px" }, 1).empty();});
             
             break;
         case 2:
             score += 100 * (level + 1);
 
-            $("#whyThisScore").append("<span>Double: + " + 100 * (level + 1) + "</span>")
+            $("#whyThisScore").append("<span>Double: + " + (100 * (level + 1)).toLocaleString("en-US") + "</span>")
             .fadeIn(300).animate({fontSize: "20px" }, 500)
-            .animate({ "top": "-=30px" }, {
+            .animate({ "top": "-30px" }, {
                 queue: false,
                 duration: 500
             })
-            .fadeOut(500, function() {$("#whyThisScore").animate({ "top": "+=30px" }, 1).empty();});
+            .fadeOut(500, function() {$("#whyThisScore").animate({ "top": "+30px" }, 1).empty();});
             
             break;
         case 3:
             score += 300 * (level + 1);
 
-            $("#whyThisScore").append("<span>Triple: + " + 300 * (level + 1) + "</span>")
+            $("#whyThisScore").append("<span>Triple: + " + (300 * (level + 1)).toLocaleString("en-US") + "</span>")
             .fadeIn(300).animate({fontSize: "20px" }, 500)
-            .animate({ "top": "-=30px" }, {
+            .animate({ "top": "-30px" }, {
                 queue: false,
                 duration: 500
             })
-            .fadeOut(500, function() {$("#whyThisScore").animate({ "top": "+=30px" }, 1).empty();});
+            .fadeOut(500, function() {$("#whyThisScore").animate({ "top": "+30px" }, 1).empty();});
             
             break;
         case 4:
             score += 1200 * (level + 1);
 
-            $("#whyThisScore").append("<span>Tetris: + " + 1200 * (level + 1) + "</span>")
+            $("#whyThisScore").append("<span>Tetris: + " + (1200 * (level + 1)).toLocaleString("en-US") + "</span>")
             .fadeIn(300).animate({fontSize: "20px" }, 500)
-            .animate({ "top": "-=30px" }, {
+            .animate({ "top": "-30px" }, {
                 queue: false,
                 duration: 500
             })
-            .fadeOut(500, function() {$("#whyThisScore").animate({ "top": "+=30px" }, 1).empty();});
+            .fadeOut(500, function() {$("#whyThisScore").animate({ "top": "+30px" }, 1).empty();});
             
             break;
     }
