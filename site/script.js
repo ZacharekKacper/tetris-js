@@ -53,6 +53,8 @@ function startGame() {
         level = 0;
         numberOfDeletedLines = 0;
         score = 0;
+
+        document.querySelector("#level").innerHTML = 0;
     }
 }
 function changeVisibility()
@@ -449,15 +451,51 @@ function deleteFullLines(){
     switch(linesToDelete.length){
         case 1:
             score += 40 * (level + 1);
+
+            $("#whyThisScore").append("<span>Single: + " + 40 * (level + 1) + "</span>")
+            .fadeIn(300).animate({fontSize: "20px" }, 500)
+            .animate({ "top": "-=30px" }, {
+                queue: false,
+                duration: 500
+            })
+            .fadeOut(500, function() {$("#whyThisScore").animate({ "top": "+=30px" }, 1).empty();});
+            
             break;
         case 2:
             score += 100 * (level + 1);
+
+            $("#whyThisScore").append("<span>Double: + " + 100 * (level + 1) + "</span>")
+            .fadeIn(300).animate({fontSize: "20px" }, 500)
+            .animate({ "top": "-=30px" }, {
+                queue: false,
+                duration: 500
+            })
+            .fadeOut(500, function() {$("#whyThisScore").animate({ "top": "+=30px" }, 1).empty();});
+            
             break;
         case 3:
             score += 300 * (level + 1);
+
+            $("#whyThisScore").append("<span>Triple: + " + 300 * (level + 1) + "</span>")
+            .fadeIn(300).animate({fontSize: "20px" }, 500)
+            .animate({ "top": "-=30px" }, {
+                queue: false,
+                duration: 500
+            })
+            .fadeOut(500, function() {$("#whyThisScore").animate({ "top": "+=30px" }, 1).empty();});
+            
             break;
         case 4:
             score += 1200 * (level + 1);
+
+            $("#whyThisScore").append("<span>Tetris: + " + 1200 * (level + 1) + "</span>")
+            .fadeIn(300).animate({fontSize: "20px" }, 500)
+            .animate({ "top": "-=30px" }, {
+                queue: false,
+                duration: 500
+            })
+            .fadeOut(500, function() {$("#whyThisScore").animate({ "top": "+=30px" }, 1).empty();});
+            
             break;
     }
     document.querySelector("#score").innerHTML = score.toLocaleString("en-US");
@@ -468,6 +506,8 @@ function deleteFullLines(){
         {
             tickTime *= 0.85;
             oldLevel = level;
+
+            $("#levelUp").fadeIn(300).animate({fontSize: "25px" }, 500).fadeOut(500).animate({fontSize: "20px" }, 1);
         }
         document.querySelector("#level").innerHTML = level;
         // console.log(`OldLevel: ${oldLevel}`);
