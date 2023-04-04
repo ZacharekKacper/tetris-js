@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `leaderboard` (
   `id` int(11) NOT NULL,
-  `player` varchar(20) NOT NULL,
+  `player` varchar(15) NOT NULL,
   `level` int(11) NOT NULL,
   `score` int(11) NOT NULL,
   `time` varchar(10) NOT NULL
