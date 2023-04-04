@@ -12,13 +12,15 @@ let score = 0;
 let tickTime = 1000;
 let seconds = 0;
 let minutes = 0;
+let alreadySend = false;
 window.addEventListener("keydown", clickEvent);
+
 
 //funkcja do startu gry
 function startGame() {
     if (!gameRunning)
     {
-        
+        alreadySend = false;
         shuffle(pieces);
         document.querySelector("#startGame").setAttribute("onclick","");
         let toClear = document.querySelectorAll(".column");

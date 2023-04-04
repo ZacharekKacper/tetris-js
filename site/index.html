@@ -313,8 +313,11 @@
                             <span id="finalTimeNumber" class="scorePoints"></span>
                         </div>
                     </div>
+                    <form>
                     <input type="text" id="PlayerName" maxlength="20" placeholder="Enter your name..." required>
-                    <button onclick="send()">Send</button>
+                    <button type="submit" id="submit-button">Save score</button>
+                    </form>
+                    
                 </div>
                 <div id="startDiv">
                     <span id="startGame" onclick="startGame()">Play Again</span>
@@ -382,6 +385,9 @@
         <div id="lbDiv">
             <div id="leaderboard">
                 <!-- miejsce na leaderboard -->
+                <table id="leaderboard-table">
+                    
+                </table>
             </div>
         </div>
     </div>
