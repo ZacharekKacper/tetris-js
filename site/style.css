@@ -17,6 +17,17 @@
         transform: scale(1);
     }
 }
+@keyframes growStart {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
 
 html, body {
     height: 100%;
@@ -81,7 +92,7 @@ body::before {
     border-radius: 6px;
     content: "";
 }
-.column, #hold-text, #next-text, #roundInfo, button, #hold-piece, .next-piece, #PlayerName {
+.column, #hold-text, #next-text, #roundInfo, button, #hold-piece, .next-piece, #PlayerName, th {
     background-color: #0e0e0e;
 }
 #game {
@@ -239,9 +250,36 @@ button:active {
     width: 90%;
     height: 80%;
     position: absolute;
-    bottom: 40px;
-    /* overflow-y: scroll; */               /*to dodac pozniej*/
+    bottom: 50px;
+    overflow-y: scroll;  
 }
+
+table {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .3);
+    border-collapse: collapse;
+    text-align: center;
+    /* display: inline-block; */
+}
+
+td, th {
+    padding: 5px;
+}
+th {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
+}
+
+tr {
+    /* background-color: rgba(0, 0, 0, .3); */
+    border-bottom: 1px solid #0e0e0e;
+}
+/* tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, .3);
+} */
+
 
 #endScreen {
     position: absolute;
@@ -296,6 +334,7 @@ button:active {
     transition: 0.5s;
     padding: 5px 20px;
     font-weight: 700;
+    animation: growStart 2s cubic-bezier(.50,.10,.50,.90) infinite;
     
 }
 #startGame:hover {
@@ -348,4 +387,27 @@ button:active {
     height: 150%;
     font-size: 15px;
     transform: rotate(10deg);
+}
+
+::-webkit-scrollbar {
+    height: 7px;
+    width: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(14, 14, 14, 0.6);
+    /* background-color: rgb(14, 14, 14); */
+    border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(14, 14, 14, 0.8);
+}
+
+::-webkit-scrollbar-thumb:active {
+    background-color: rgb(14, 14, 14);
 }

@@ -34,7 +34,7 @@ $('#submit-button').click(function(e) {
             document.querySelector("#leaderboard-table").innerHTML="<tr><th>Place</th><th>Name</th><th>Level</th><th>Score</th><th>Time</th></tr>";
             place = 1;
             leaderboardData.forEach(element => {
-              document.querySelector("#leaderboard-table").innerHTML+=`<tr><td>${place}</td><td>${element.player}</td><td>${element.level}</td><td>${element.score}</td><td>${element.time}</td></tr>`
+              document.querySelector("#leaderboard-table").innerHTML+=`<tr><td>${place}</td><td>${element.player}</td><td>${element.level}</td><td>${element.score.toLocaleString("en-US")}</td><td>${element.time}</td></tr>`
               place++;
             });
           }

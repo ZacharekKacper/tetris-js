@@ -454,7 +454,7 @@ function deleteFullLines(){
         case 1:
             score += 40 * (level + 1);
 
-            $("#whyThisScore").append("<span>Single: + " + (40 * (level + 1)).toLocaleString("en-US") + "</span>")
+            $("#whyThisScore").append("<span>Single: + " + (40 * (level + 1)).toLocaleString("en-US") + "</span><br>")
             .fadeIn(300).animate({fontSize: "20px" }, 500)
             .animate({ "top": "-30px" }, {
                 queue: false,
@@ -466,7 +466,7 @@ function deleteFullLines(){
         case 2:
             score += 100 * (level + 1);
 
-            $("#whyThisScore").append("<span>Double: + " + (100 * (level + 1)).toLocaleString("en-US") + "</span>")
+            $("#whyThisScore").append("<span>Double: + " + (100 * (level + 1)).toLocaleString("en-US") + "</span><br>")
             .fadeIn(300).animate({fontSize: "20px" }, 500)
             .animate({ "top": "-30px" }, {
                 queue: false,
@@ -478,7 +478,7 @@ function deleteFullLines(){
         case 3:
             score += 300 * (level + 1);
 
-            $("#whyThisScore").append("<span>Triple: + " + (300 * (level + 1)).toLocaleString("en-US") + "</span>")
+            $("#whyThisScore").append("<span>Triple: + " + (300 * (level + 1)).toLocaleString("en-US") + "</span><br>")
             .fadeIn(300).animate({fontSize: "20px" }, 500)
             .animate({ "top": "-30px" }, {
                 queue: false,
@@ -490,7 +490,7 @@ function deleteFullLines(){
         case 4:
             score += 1200 * (level + 1);
 
-            $("#whyThisScore").append("<span>Tetris: + " + (1200 * (level + 1)).toLocaleString("en-US") + "</span>")
+            $("#whyThisScore").append("<span>Tetris: + " + (1200 * (level + 1)).toLocaleString("en-US") + "</span><br>")
             .fadeIn(300).animate({fontSize: "20px" }, 500)
             .animate({ "top": "-30px" }, {
                 queue: false,

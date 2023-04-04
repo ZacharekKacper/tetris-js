@@ -46,7 +46,7 @@ function displayLeaderboard(){
     }
   })
 connection.query(
-    `SELECT player, level, score, time FROM leaderboard ORDER BY score DESC, player ASC;`,
+    `SELECT player, level, score, time FROM leaderboard ORDER BY score DESC, level DESC, time ASC, player ASC;`,
     function(err, results, fields){
       console.log(results); // results contains rows returned by server
       app.get('/data', (request, response) => {
