@@ -13,6 +13,7 @@ let tickTime = 1000;
 let seconds = 0;
 let minutes = 0;
 let alreadySend = false;
+let blockTimeout;
 window.addEventListener("keydown", clickEvent);
 
 
@@ -151,6 +152,7 @@ function timer(){
 //todo: trzeba tu dodać by tworzyło ich więcej by w kolejce pokazywało
 
 function createNewBlock(check) {
+    clearTimeout(blockTimeout);
     if(gameRunning){
         if (check)
         {
@@ -189,6 +191,7 @@ function createNewBlock(check) {
     }
 }
 function drawBlock(){
+    clearTimeout(blockTimeout);
     activeBlock.tiles.forEach((element) => {
         let cell = document.querySelector(`#row${element.y} #column${element.x}`);
         // cell.innerHTML = "X";
@@ -252,50 +255,88 @@ function rotateBlockLeft() {
     clearBlock();
     const rotatedTiles = [];
     const center = activeBlock.tiles[1];
+    let outOfBoardX = 0;
+    let outOfBoardY = 0;
     activeBlock.tiles.forEach((tile) => {
-      // Translate coordinates to origin and rotate by -90 degrees
-      const color = tile.color;
-      const x = -(tile.y - center.y) + center.x;
-      const y = (tile.x - center.x) + center.y;
-      // Check if tile is within bounds
-      if (x < 1 || x > 10 || y < 1 || y > 20) {
-        drawBlock();
-        throw new Error("Block cannot be rotated outside of the board.");
-      }
-      // Check if tile overlaps with static coordinates
-      if (staticCords.some((cord) => cord.x === x && cord.y === y)) {
-        drawBlock();
-        throw new Error("Block cannot be rotated into static coordinates.");
-      }
-      rotatedTiles.push({ x, y, color});
+        // Translate coordinates to origin and rotate by -90 degrees
+        const color = tile.color;
+        let x = -(tile.y - center.y) + center.x;
+        let y = (tile.x - center.x) + center.y;
+
+        // Check if tile is within bounds
+        if (x < 1) {
+            outOfBoardX = Math.max(outOfBoardX, 1 - x);
+        } else if (x > 10) {
+            outOfBoardX = Math.min(outOfBoardX, 10 - x);
+        }
+        if (y < 1) {
+            outOfBoardY = Math.max(outOfBoardY, 1 - y);
+        } else if (y > 20) {
+            outOfBoardY = Math.min(outOfBoardY, 20 - y);
+        }
+
+        // Check if tile overlaps with static coordinates
+        if (staticCords.some((cord) => cord.x === x && cord.y === y)) {
+            drawBlock();
+            throw new Error("Block cannot be rotated into static coordinates.");
+        }
+        rotatedTiles.push({ x, y, color });
     });
+
+    // Translate coordinates back to original position
+    center.x += outOfBoardX;
+    center.y += outOfBoardY;
+    rotatedTiles.forEach(tile => {
+        tile.x += outOfBoardX;
+        tile.y += outOfBoardY;
+    });
+
     activeBlock.tiles = rotatedTiles;
     drawBlock();
-  }
-  function rotateBlockRight() {
+}
+function rotateBlockRight() {
     clearBlock();
     const rotatedTiles = [];
     const center = activeBlock.tiles[1];
+    let outOfBoardX = 0;
+    let outOfBoardY = 0;
     activeBlock.tiles.forEach((tile) => {
-      // Translate coordinates to origin and rotate by 90 degrees
-      const color = tile.color;
-      const x = tile.y - center.y + center.x;
-      const y = -(tile.x - center.x) + center.y;
-      // Check if tile is within bounds
-      if (x < 1 || x > 10 || y < 1 || y > 20) {
-        drawBlock();
-        throw new Error("Block cannot be rotated outside of the board.");
-      }
-      // Check if tile overlaps with static coordinates
-      if (staticCords.some((cord) => cord.x === x && cord.y === y)) {
-        drawBlock();
-        throw new Error("Block cannot be rotated into static coordinates.");
-      }
-      rotatedTiles.push({ x, y , color});
+        // Translate coordinates to origin and rotate by 90 degrees
+        const color = tile.color;
+        let x = tile.y - center.y + center.x;
+        let y = -(tile.x - center.x) + center.y;
+
+        // Check if tile is within bounds
+        if (x < 1) {
+            outOfBoardX = Math.max(outOfBoardX, 1 - x);
+        } else if (x > 10) {
+            outOfBoardX = Math.min(outOfBoardX, 10 - x);
+        }
+        if (y < 1) {
+            outOfBoardY = Math.max(outOfBoardY, 1 - y);
+        } else if (y > 20) {
+            outOfBoardY = Math.min(outOfBoardY, 20 - y);
+        }
+
+        // Check if tile overlaps with static coordinates
+        if (staticCords.some((cord) => cord.x === x && cord.y === y)) {
+            drawBlock();
+            throw new Error("Block cannot be rotated into static coordinates.");
+        }
+        rotatedTiles.push({ x, y, color });
     });
+
+    // Translate coordinates back to original position
+    center.x += outOfBoardX;
+    center.y += outOfBoardY;
+    rotatedTiles.forEach(tile => {
+        tile.x += outOfBoardX;
+        tile.y += outOfBoardY;
+    });
+
     activeBlock.tiles = rotatedTiles;
     drawBlock();
-  }
+}
 //sprawdza co jest klinięte i wywołuje odpowiednie funkcje do tego
 function clickEvent(event) {
     if(gameRunning){
@@ -313,20 +354,25 @@ function clickEvent(event) {
     
         switch (pressedKey) {
             case right:
+                clearTimeout(blockTimeout);
                 moveBlockRight();
                 break;
             case left:
+                clearTimeout(blockTimeout);
                 moveBlockLeft();
                 break;
             case down:
+                clearTimeout(blockTimeout);
                 moveBlockDown();
                 break;
             case rotateRight1:
             case rotateRight2:
+                clearTimeout(blockTimeout);
                 rotateBlockRight();
                 break;
             case rotateLeft1:
             case rotateLeft2:
+                clearTimeout(blockTimeout);
                 rotateBlockLeft();
                 break;
             case hold1:
@@ -334,6 +380,7 @@ function clickEvent(event) {
                 hold();
                 break;
             case instantDown:
+                clearTimeout(blockTimeout);
                 hardDrop();
         }
     }
@@ -363,8 +410,10 @@ function moveBlockDown() {
             drawBlock();
         } else {
             // jeśli blok nie może dalej iść w dół to dodaje jego kordy do tablicy staticCords
+
             addToStaticBlocks();
             hardDropUsed = true;
+
         }
     }
 }
@@ -425,6 +474,14 @@ function moveBlockLeft() {//to samo co move right
 }
 
 function addToStaticBlocks() {//dodaje kordy elementu do tablicy z statycznymi kordynatami
+    let timeoutTime;
+    if(hardDropUsed){
+        timeoutTime = 1000;
+    }
+    else{
+        timeoutTime = 0;
+    }
+    blockTimeout = setTimeout(()=>{
     activeBlock.tiles.forEach((element) => {
         staticCords.push(element);
     });
@@ -432,6 +489,7 @@ function addToStaticBlocks() {//dodaje kordy elementu do tablicy z statycznymi k
     createNewBlock(true);
     deleteFullLines();
     alreadyPressedHold = false;
+    }, timeoutTime)
 }
 
 let oldLevel = 0;
@@ -449,7 +507,6 @@ function deleteFullLines(){
             linesToDelete.push(line);
         }
     });
-    console.log(linesToDelete);
     switch(linesToDelete.length){
         case 1:
             score += 40 * (level + 1);
@@ -512,11 +569,9 @@ function deleteFullLines(){
             $("#levelUp").fadeIn(300).animate({fontSize: "25px" }, 500).fadeOut(500).animate({fontSize: "20px" }, 1);
         }
         document.querySelector("#level").innerHTML = level;
-        // console.log(`OldLevel: ${oldLevel}`);
+
     }
-    // console.log(`tickTime: ${tickTime}`);
-    // console.log(`level: ${level}`);
-    // console.log(`numberOfDeletedLines: ${numberOfDeletedLines}`);
+
     
     linesToDelete.forEach(line => {
         staticCords.forEach((element) => {
@@ -575,7 +630,7 @@ function shufflePieces(check)
     {
         currentPiece = p;
     }
-    // console.log(p)
+
     return p;
 }
 
@@ -588,12 +643,10 @@ function displayNextPieces(check)
         let next = document.querySelectorAll(".next-piece");
         let srcs = document.querySelectorAll(".nextP");
         for (let i = 0; i < next.length; i++) {
-            // next[i].innerHTML = pieces[i+1];
-            // console.log(srcs[i].getAttribute('src'))
-            // console.log(pieceImages[pieces[i]])
+
             srcs[i].src = ("images/Pieces/" + pieceImages[pieces[i+2] - 1]);
         }
-        // console.log(pieceImages[pieces[1] - 1] + " " + pieceImages[pieces[2] - 1] + " " + pieceImages[pieces[3] - 1] + " " + pieceImages[pieces[4] - 1] + " " + pieceImages[pieces[5] - 1] + " " + pieceImages[pieces[6] - 1])
+
     }
 }
 function shuffle(array) {

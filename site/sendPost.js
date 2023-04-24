@@ -30,7 +30,6 @@ $('#submit-button').click(function(e) {
         xhr.onreadystatechange = function () {
           if (xhr.readyState === 4 && xhr.status === 200) {
             leaderboardData = JSON.parse(xhr.responseText);
-            console.log(leaderboardData);
             document.querySelector("#leaderboard-table").innerHTML="<tr><th>Place</th><th>Name</th><th>Level</th><th>Score</th><th>Time</th></tr>";
             place = 1;
             leaderboardData.forEach(element => {
